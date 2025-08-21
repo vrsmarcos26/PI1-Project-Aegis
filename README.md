@@ -19,8 +19,7 @@ Para a primeira fase deste projeto, nosso foco será a pesquisa e análise de da
 
 | Membro                | Papel                                      |
 | --------------------- | ------------------------------------------ |
-| 👑 **[Marcos Vinícius](https://github.com/vrsmarcos26)
-** | **Líder de Equipe / Desenvolvedor** |
+| 👑 **[Marcos Vinícius](https://github.com/vrsmarcos26)** | **Líder de Equipe / Desenvolvedor** |
 | 🧪 **[João Marcelo](https://github.com/joaomarcelo11)** | **Tester / Documentação** |
 | 🗃️ **[Davu](https://github.com/)** | **Desenvolvedor (Foco em Banco de Dados)** |
 | 💻 **[Eduardo](https://github.com/edu-uchoa)** | **Desenvolvedor Full-Stack** |
