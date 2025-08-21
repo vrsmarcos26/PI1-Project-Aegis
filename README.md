@@ -22,7 +22,7 @@ Para a primeira fase deste projeto, nosso foco será a pesquisa e análise de da
 | 👑 **Marcos Vinícius** | **Líder de Equipe / Desenvolvedor** |
 | 🧪 **João Marcelo** | **Tester / Documentação** |
 | 🗃️ **Davu** | **Desenvolvedor (Foco em Banco de Dados)** |
-| 💻 **Eduardo** | **Desenvolvedor Full-Stack** |
+| 💻 **Eduardo Uchoa** | **Desenvolvedor Full-Stack** |
 | 💻 **Felipe Barcelos** | **Desenvolvedor Full-Stack** |
 
 ## 📂 4. Estrutura do Repositório
