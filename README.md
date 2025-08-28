@@ -1,10 +1,8 @@
-# 🛡️ Project Aegis: Plataforma de Defesa Cibernética Pessoal
+# 🛡️ Project Aegis: Painel de Inteligência de Ameaças Cibernéticas
 
 ## 🚀 1. Descrição do Projeto
 
-A segurança digital do usuário comum é fragmentada e complexa. Diante de um cenário com ameaças crescentes como malware, phishing, vazamentos de dados e violações de privacidade, as soluções atuais estão espalhadas por múltiplos aplicativos e serviços.
-
-O **Project Aegis** surge como uma proposta para unificar a defesa cibernética pessoal. O objetivo final é desenvolver uma plataforma 360° que centraliza múltiplas camadas de proteção em um único ecossistema, oferecendo ao usuário final uma visão clara e proativa sobre sua postura de segurança digital.
+O Project Aegis é um Painel de Inteligência de Ameaças que busca resolver esse problema. O projeto consiste em um dashboard analítico que irá coletar, processar e visualizar dados de fontes públicas e confiáveis sobre o cenário atual de riscos digitais. O objetivo é centralizar informações críticas e apresentá-las de forma clara e intuitiva, permitindo que usuários possam compreender melhor as ameaças e tendências do mundo da cibersegurança.
 
 ## 🎯 2. Objetivos Iniciais (Fase de Levantamento de Dados)
 
