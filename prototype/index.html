@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protótipo | Project Aegis Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ Project Aegis: Painel de Inteligência de Ameaças</h1>
+            <div class="filter-container">
+                <label for="period-filter">Período:</label>
+                <select id="period-filter">
+                    <option value="30d">Últimos 30 dias</option>
+                    <option value="90d">Últimos 90 dias</option>
+                    <option value="1ano">Último Ano</option>
+                </select>
+            </div>
+        </header>
+
+        <main>
+            <section class="kpi-cards">
+                <div class="card">
+                    <h2>1.254</h2>
+                    <p>Novas Vulnerabilidades (CVEs)</p>
+                </div>
+                <div class="card">
+                    <h2>4.500.000</h2>
+                    <p>Contas Vazadas</p>
+                </div>
+                <div class="card">
+                    <h2>Phishing</h2>
+                    <p>Ameaça Mais Comum</p>
+                </div>
+            </section>
+
+            <section class="charts-container">
+                <div class="chart-card">
+                    <h3>Distribuição de Severidade (CVEs)</h3>
+                    <div class="chart-placeholder">
+                        <p>[Aqui entrará um gráfico de pizza/rosca]</p>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>Setores Mais Atacados por Vazamentos</h3>
+                     <div class="chart-placeholder">
+                        <p>[Aqui entrará um gráfico de barras]</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="table-container">
+                <h3>Top 5 Softwares Vulneráveis</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Software/Fornecedor</th>
+                            <th>Nº de Vulnerabilidades</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Google Chrome</td>
+                            <td>42</td>
+                        </tr>
+                        <tr>
+                            <td>Windows 11</td>
+                            <td>35</td>
+                        </tr>
+                         <tr>
+                            <td>Apache Log4j</td>
+                            <td>29</td>
+                        </tr>
+                         <tr>
+                            <td>iOS</td>
+                            <td>21</td>
+                        </tr>
+                         <tr>
+                            <td>VMware ESXi</td>
+                            <td>18</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
