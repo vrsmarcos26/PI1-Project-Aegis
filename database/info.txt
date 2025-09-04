@@ -1,0 +1,16 @@
+Bases oficiais de vulnerabilidades
+🔗 https://nvd.nist.gov/vuln/data-feeds
+The CVE API is used to easily retrieve information on a single CVE or a collection of CVE from the NVD
+Common Vulnerabilities and Exposures (CVE) defines a vulnerability as:
+"A weakness in the computational logic (e.g., code) found in software and hardware components that, when exploited, results in a negative impact to confidentiality, integrity, or availability. Mitigation of the vulnerabilities in this context typically involves coding changes, but could also include specification changes or even specification deprecations (e.g., removal of affected protocols or functionality in their entirety)."
+
+https://www.threatminer.org/api.php  (ThreatMiner is an open-source threat intelligence platform that helps cybersecurity researchers and analysts gather and analyze threat data)
+
+Estratégia Nacional de Cibersegurança (E-Ciber) 
+https://www.gov.br/gsi/pt-br/assuntos/seguranca-da-informacao-e-cibernetica/estrategia-nacional-de-ciberseguranca-eciber
+
+
+https://sites.tcu.gov.br/listadealtorisco/seguranca_da_informacao_e_seguranca_cibernetica.html
+
+
+.....
