@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protótipo Profissional | Project Aegis Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🛡️ Aegis</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="active">Dashboard Principal</a>
+                <a href="#">Análise de CVEs</a>
+                <a href="#">Vazamentos</a>
+                <a href="#">Relatórios</a>
+                <a href="#">Configurações</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Project Aegis © 2025</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h2>Painel de Inteligência de Ameaças</h2>
+                <div class="filter-container">
+                    <select id="period-filter">
+                        <option value="30d">Últimos 30 dias</option>
+                        <option value="90d">Últimos 90 dias</option>
+                        <option value="1ano">Último Ano</option>
+                    </select>
+                </div>
+            </header>
+
+            <section class="kpi-grid">
+                <div class="card kpi-card">
+                    <div class="kpi-text">
+                        <p>Novas Vulnerabilidades (Mês)</p>
+                        <h2>1.254</h2>
+                    </div>
+                    <div class="kpi-sparkline vulns">
+                        <svg viewBox="0 0 100 30"><polyline fill="none" stroke="currentColor" stroke-width="2" points="0,20 20,15 40,25 60,10 80,18 100,12 "/></svg>
+                    </div>
+                </div>
+                <div class="card kpi-card">
+                    <div class="kpi-text">
+                        <p>Contas Vazadas (Mês)</p>
+                        <h2>4.5 Milhões</h2>
+                    </div>
+                     <div class="kpi-sparkline breaches">
+                        <svg viewBox="0 0 100 30"><polyline fill="none" stroke="currentColor" stroke-width="2" points="0,10 20,25 40,15 60,20 80,5 100,10 "/></svg>
+                    </div>
+                </div>
+                <div class="card kpi-card">
+                    <div class="kpi-text">
+                        <p>Ameaça Mais Comum</p>
+                        <h2>Phishing</h2>
+                    </div>
+                </div>
+                <div class="card kpi-card">
+                     <div class="kpi-text">
+                        <p>Setor Mais Atacado</p>
+                        <h2>Governo</h2>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="dashboard-grid">
+                <div class="card grid-col-2">
+                    <h3>Vulnerabilidades Críticas por Ano</h3>
+                    <div class="chart-placeholder">
+                        <svg viewBox="0 0 500 200" class="static-line-chart">
+                            <defs><linearGradient id="line-chart-gradient" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#00c49f" stop-opacity="0.3"/><stop offset="100%" stop-color="#00c49f" stop-opacity="0"/></linearGradient></defs>
+                            <line class="grid-line" x1="50" y1="20" x2="480" y2="20"></line><line class="grid-line" x1="50" y1="60" x2="480" y2="60"></line><line class="grid-line" x1="50" y1="100" x2="480" y2="100"></line><line class="grid-line" x1="50" y1="140" x2="480" y2="140"></line>
+                            <line class="axis-line" x1="50" y1="0" x2="50" y2="180"></line><line class="axis-line" x1="50" y1="180" x2="480" y2="180"></line>
+                            <text class="axis-label" x="40" y="25" text-anchor="end">4k</text><text class="axis-label" x="40" y="105" text-anchor="end">2k</text>
+                            <text class="axis-label" x="80" y="195">2021</text><text class="axis-label" x="180" y="195">2022</text><text class="axis-label" x="280" y="195">2023</text><text class="axis-label" x="380" y="195">2024</text><text class="axis-label" x="480" y="195">2025</text>
+                            <path class="fill-gradient" d="M 80 110 L 180 95 L 280 75 L 380 90 L 480 20 L 480 180 L 80 180 Z"></path>
+                            <polyline class="data-line" points="80,110 180,95 280,75 380,90 480,20"></polyline>
+                            <circle class="data-point" cx="80" cy="110" r="3"></circle><circle class="data-point" cx="180" cy="95" r="3"></circle><circle class="data-point" cx="280" cy="75" r="3"></circle><circle class="data-point" cx="380" cy="90" r="3"></circle><circle class="data-point" cx="480" cy="20" r="3"></circle>
+                        </svg>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Distribuição de Severidade</h3>
+                    <div class="chart-wrapper">
+                         <svg width="100%" height="100%" viewBox="0 0 42 42" class="donut">
+                           <circle class="donut-hole" cx="21" cy="21" r="15.915" fill="#fff"></circle>
+                           <circle class="donut-ring" cx="21" cy="21" r="15.915" fill="transparent" stroke="#f0f2f5" stroke-width="3.5"></circle>
+                           <circle class="donut-segment segment-critica" cx="21" cy="21" r="15.915" fill="transparent" stroke-width="3.5" stroke-dasharray="20 80" stroke-dashoffset="25"></circle>
+                           <circle class="donut-segment segment-alta" cx="21" cy="21" r="15.915" fill="transparent" stroke-width="3.5" stroke-dasharray="45 55" stroke-dashoffset="5"></circle>
+                           <circle class="donut-segment segment-media" cx="21" cy="21" r="15.915" fill="transparent" stroke-width="3.5" stroke-dasharray="25 75" stroke-dashoffset="-40"></circle>
+                         </svg>
+                         <div class="chart-legend">
+                            <p><span class="legend-color legend-critica"></span>Crítica</p>
+                            <p><span class="legend-color legend-alta"></span>Alta</p>
+                            <p><span class="legend-color legend-media"></span>Média</p>
+                            <p><span class="legend-color legend-baixa"></span>Baixa</p>
+                         </div>
+                    </div>
+                </div>
+                 <div class="card">
+                    <h3>Setores Mais Atacados</h3>
+                     <div class="chart-placeholder bar-chart-container">
+                        <p>Governo<span class="bar-h" style="width: 100%;"></span></p>
+                        <p>Saúde<span class="bar-h" style="width: 85%;"></span></p>
+                        <p>Tecnologia<span class="bar-h" style="width: 70%;"></span></p>
+                        <p>Financeiro<span class="bar-h" style="width: 65%;"></span></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Top 5 Países Atacados</h3>
+                    <div class="chart-placeholder bar-chart-container">
+                        <p>EUA<span class="bar-h" style="width: 100%;"></span></p>
+                        <p>China<span class="bar-h" style="width: 80%;"></span></p>
+                        <p>Rússia<span class="bar-h" style="width: 70%;"></span></p>
+                        <p>Brasil<span class="bar-h" style="width: 60%;"></span></p>
+                        <p>Alemanha<span class="bar-h" style="width: 50%;"></span></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Faixa Etária Mais Atingida</h3>
+                    <div class="chart-placeholder bar-chart-v-container">
+                        <div class="bar-v" style="height: 25%;"><span class="label">18-24</span></div>
+                        <div class="bar-v" style="height: 40%;"><span class="label">25-34</span></div>
+                        <div class="bar-v" style="height: 55%;"><span class="label">35-44</span></div>
+                        <div class="bar-v" style="height: 65%;"><span class="label">45-54</span></div>
+                        <div class="bar-v" style="height: 80%;"><span class="label">55-64</span></div>
+                        <div class="bar-v" style="height: 95%;"><span class="label">65+</span></div>
+                    </div>
+                </div>
+                <div class="card grid-col-3">
+                    <h3>Grandes Vazamentos de Dados Recentes</h3>
+                    <table>
+                        <thead><tr><th>Empresa</th><th>Setor</th><th>Contas Afetadas</th></tr></thead>
+                        <tbody>
+                            <tr><td>Global Transact</td><td>Financeiro</td><td>2.1 Bilhões</td></tr>
+                            <tr><td>SocialNet</td><td>Tecnologia</td><td>950 Milhões</td></tr>
+                            <tr><td>HealthCare Gov</td><td>Governo</td><td>450 Milhões</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
