@@ -1,175 +1,210 @@
-/* Importando uma fonte mais moderna (Roboto) */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
-/* Reset Básico e Estilo Geral */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Estilo geral e tema escuro (Paleta de Cores Original) */
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
-}
-
-.dashboard-container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-}
-
-/* --- Barra Lateral (Sidebar) --- */
-.sidebar {
-    width: 240px;
-    background-color: #001529;
-    color: rgba(255, 255, 255, 0.65);
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    transition: width 0.3s;
-}
-
-.sidebar-header {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    margin: 0;
     padding: 20px;
-    text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.sidebar-header h1 {
-    color: #fff;
-    font-size: 1.8em;
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-.sidebar-nav {
-    flex-grow: 1;
-    padding-top: 20px;
-}
-
-.sidebar-nav a {
-    display: block;
-    padding: 15px 20px;
-    color: rgba(255, 255, 255, 0.65);
-    text-decoration: none;
-    font-weight: 500;
-    border-left: 3px solid transparent;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.sidebar-nav a:hover {
-    background-color: rgba(24, 144, 255, 0.2);
-    color: #fff;
-}
-
-.sidebar-nav a.active {
-    background-color: #1890ff;
-    color: #fff;
-    border-left-color: #00c49f;
-}
-
-.sidebar-footer {
-    padding: 20px;
-    text-align: center;
-    font-size: 0.8em;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* --- Conteúdo Principal --- */
-.main-content {
-    flex-grow: 1;
-    background-color: #f0f2f5;
-    padding: 24px;
-    overflow-y: auto;
-}
-
-.main-header {
+/* Cabeçalho */
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #0f3460;
+    padding-bottom: 15px;
 }
 
-.main-header h2 {
-    font-size: 1.6em;
-    color: #333;
-    font-weight: 500;
+header h1 {
+    font-size: 1.8em;
+    color: #e94560;
+    margin: 0;
 }
 
 .filter-container select {
-    padding: 8px 12px;
-    border: 1px solid #d9d9d9;
-    border-radius: 6px;
-    background-color: #fff;
-    font-size: 0.9em;
+    padding: 10px;
+    background-color: #16213e;
+    color: #e0e0e0;
+    border: 1px solid #0f3460;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
 }
 
-/* --- KPIs --- */
-.kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
-    margin-bottom: 24px;
-}
-
-.kpi-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.kpi-text p {
-    font-size: 0.9em;
-    color: #555;
-    margin-bottom: 8px;
-}
-
-.kpi-text h2 {
-    font-size: 2.2em;
-    font-weight: 700;
-    color: #003a8c;
-}
-
-.kpi-sparkline {
-    width: 100px;
-    height: 40px;
-}
-.kpi-sparkline.vulns { stroke: #ff4d4f; }
-.kpi-sparkline.breaches { stroke: #faad14; }
-
-/* --- Grid do Dashboard --- */
+/* Grid Principal do Dashboard */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
 }
 
+/* Estilo dos Cards */
 .card {
-    background-color: #fff;
+    background-color: #16213e;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.12);
+    border-radius: 10px;
+    border: 1px solid #0f3460;
     display: flex;
     flex-direction: column;
 }
 
 .card h3 {
     margin-top: 0;
-    margin-bottom: 16px;
+    text-align: center;
+    color: #c0c0c0;
     font-size: 1.1em;
-    font-weight: 500;
+    margin-bottom: 15px;
 }
 
-.grid-col-2 { grid-column: span 2; }
-.grid-col-3 { grid-column: span 3; }
+/* Layout dos Cards no Grid */
+.kpi-card { text-align: center; }
+.kpi-card h2 {
+    font-size: 2.5em;
+    margin: 0 0 5px 0;
+    color: #e94560;
+}
+.kpi-card p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #c0c0c0;
+}
 
-.chart-placeholder, .table-placeholder {
+.chart-placeholder {
     flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    background-color: rgba(15, 52, 96, 0.2);
+    border-radius: 8px;
+    padding: 10px;
     min-height: 250px;
+}
+
+.line-chart-card { grid-column: span 2; }
+.doughnut-chart-card { grid-column: span 2; }
+.bar-chart-card { grid-column: span 2; }
+.polar-chart-card { grid-column: span 2; }
+.pie-chart-card { grid-column: span 2; }
+.table-card { grid-column: span 2; }
+.list-card { grid-column: span 2; }
+.table-card.full-width { grid-column: span 4; }
+.sources-card {
+    grid-column: span 4;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+}
+.sources-card h3 { color: #aaa; }
+.sources-card ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-size: 0.9em;
+}
+.sources-card a { color: #90caf9; text-decoration: none; }
+.sources-card a:hover { text-decoration: underline; }
+
+/* Estilo da Tabela */
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px; text-align: left; border-bottom: 1px solid #0f3460; }
+thead th { color: #e94560; }
+tbody tr:hover { background-color: #0f3460; }
+.severity-critical { color: #e94560; font-weight: bold; }
+.severity-high { color: #ff8c00; font-weight: bold; }
+
+/* Gráfico de Rosca/Pizza Estático com Legenda */
+.chart-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 250px;
+    gap: 20px;
+}
+.donut, .pie { width: 60%; height: auto; transform: rotate(-90deg); background: transparent; border-radius: 50%; }
+.donut-hole { fill: #16213e; }
+.donut-ring { fill: transparent; stroke: #10192b; stroke-width: 3.5; }
+.donut-segment { transform-origin: center; }
+.segment-critica { stroke: #e94560; }
+.segment-alta { stroke: #ff8c00; }
+.segment-media { stroke: #ffd700; }
+.pie circle {
+    fill: transparent;
+    stroke-width: 32; /* Metade do viewBox */
+    transform-origin: 50% 50%;
+}
+.chart-legend p { margin: 8px 0; font-size: 0.9em; }
+.legend-color {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+.legend-critica { background-color: #e94560; }
+.legend-alta { background-color: #ff8c00; }
+.legend-media { background-color: #ffd700; }
+.legend-baixa { background-color: #1e90ff; }
+
+/* Gráfico de Barras Horizontais Estático */
+.bar-chart-container {
+    width: 100%;
+    color: #c0c0c0;
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px;
+}
+.bar-chart-container p { margin: 8px 0; }
+.bar-h { display: block; height: 15px; background-color: #1e90ff; border-radius: 5px; margin-top: 4px; }
+
+/* Gráfico de Barras Verticais Estático */
+.bar-chart-v-container { width: 100%; height: 100%; display: flex; justify-content: space-around; align-items: flex-end; padding: 0 10px; }
+.bar-v { width: 12%; background-color:#e94560; border-radius: 5px 5px 0 0; position: relative; text-align: center; }
+.bar-v .label { position: absolute; bottom: -20px; width: 100%; left: 0; font-size: 12px; color: #c0c0c0; }
+
+/* Lista de Ameaças com Barras de Progresso */
+.threat-list { list-style: none; padding: 0; height: 100%; display: flex; flex-direction: column; justify-content: space-around; }
+.threat-list li { display: flex; align-items: center; justify-content: space-between; }
+.threat-list li span { flex-basis: 30%; }
+.progress-bar { flex-basis: 65%; height: 15px; background-color: #10192b; border-radius: 10px; overflow: hidden; }
+.progress-bar div { height: 100%; background-color: #1e90ff; border-radius: 10px; }
+
+/* Estilos dos Gráficos SVG Estáticos */
+.static-line-chart .grid-line { stroke: #0f3460; stroke-dasharray: 2,2; }
+.static-line-chart .axis-line { stroke: #5a688a; }
+.static-line-chart .axis-label { fill: #c0c0c0; font-size: 12px; }
+.static-line-chart .data-line { stroke: #e94560; stroke-width: 2.5; fill: none; }
+.static-line-chart .data-point { fill: #e94560; }
+.static-line-chart .fill-gradient { fill: url(#line-chart-gradient); }
+
+/* Gráfico Polar/Radar Estático */
+.polar-chart .polar-grid { stroke: #0f3460; fill: none; }
+.polar-chart .polar-shape { stroke: #e94560; stroke-width: 2; fill: rgba(233, 69, 96, 0.4); }
+.polar-chart .polar-label { fill: #c0c0c0; font-size: 12px; }
+        
+/* Responsividade */
+@media (max-width: 1200px) {
+    .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+    .table-card.full-width, .sources-card { grid-column: span 2; }
+}
+@media (max-width: 768px) {
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .card, .line-chart-card, .doughnut-chart-card, .bar-chart-card, .list-card, .polar-chart-card, .pie-chart-card, .table-card, .table-card.full-width, .sources-card {
+        grid-column: span 1;
+    }
+    header { flex-direction: column; align-items: flex-start; gap: 10px;}
 }
 
 /* Gráfico de Barras SVG Estático */
@@ -203,66 +238,4 @@ body {
         grid-column: span 1;
     }
     header { flex-direction: column; align-items: flex-start; gap: 10px;}
-}
-
-/* Estilos dos Gráficos Estáticos */
-.static-line-chart .grid-line { stroke: #e8e8e8; stroke-dasharray: 2,2; }
-.static-line-chart .axis-line { stroke: #ccc; }
-.static-line-chart .axis-label { fill: #555; font-size: 12px; }
-.static-line-chart .data-line { stroke: #00c49f; stroke-width: 2.5; fill: none; }
-.static-line-chart .data-point { fill: #00c49f; }
-.static-line-chart .fill-gradient { fill: url(#line-chart-gradient); }
-
-.chart-wrapper { display: flex; align-items: center; justify-content: center; height: 100%; gap: 20px; }
-.donut { width: 60%; height: auto; }
-.donut-segment { transform-origin: center; }
-.segment-critica { stroke: #ff4d4f; }
-.segment-alta { stroke: #faad14; }
-.segment-media { stroke: #1890ff; }
-.chart-legend p { margin: 5px 0; font-size: 0.8em; }
-.legend-color { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
-.legend-critica { background-color: #ff4d4f; }
-.legend-alta { background-color: #faad14; }
-.legend-media { background-color: #1890ff; }
-.legend-baixa { background-color: #d9d9d9; }
-
-.bar-chart-container { width: 100%; color: #555; font-size: 0.9em; display: flex; flex-direction: column; justify-content: space-around; }
-.bar-chart-container p { margin: 6px 0; }
-.bar-h { display: block; height: 12px; background-color: #1890ff; border-radius: 5px; margin-top: 4px; }
-
-.bar-chart-v-container { width: 100%; height: 100%; display: flex; justify-content: space-around; align-items: flex-end; padding: 0 10px; }
-.bar-v { width: 12%; background-color: #ff8042; border-radius: 5px 5px 0 0; position: relative; text-align: center; }
-.bar-v .label { position: absolute; bottom: -20px; width: 100%; left: 0; font-size: 12px; color: #555; }
-
-table { width: 100%; border-collapse: collapse; }
-th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #f0f0f0; }
-thead th { background-color: #fafafa; font-weight: 500; }
-tbody tr:hover { background-color: #f8f9fa; }
-
-/* Responsividade */
-@media (max-width: 1200px) {
-    .dashboard-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 992px) {
-    .sidebar { width: 70px; }
-    .sidebar-header h1, .sidebar-nav a, .sidebar-footer p {
-       /* Simular ícones em uma versão real */
-       font-size: 0; 
-       text-align: center;
-       padding-left: 0;
-       padding-right: 0;
-    }
-     .sidebar-nav a::before {
-        content: "●";
-        font-size: 1.5rem;
-    }
-    .dashboard-grid { grid-template-columns: 1fr; }
-    .grid-col-2, .grid-col-3 { grid-column: span 1; }
-}
-@media (max-width: 768px) {
-     .dashboard-container { flex-direction: column; }
-     .sidebar { width: 100%; height: auto; flex-direction: row; }
-     .sidebar-nav { display: flex; flex-grow: 1; justify-content: center; }
-     .sidebar-header, .sidebar-footer { display: none; }
-     .main-header { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
