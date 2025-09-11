@@ -233,3 +233,36 @@ tbody tr:hover { background-color: #f8f9fa; }
      .sidebar-header, .sidebar-footer { display: none; }
      .main-header { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
+
+/* Gráfico de Barras SVG Estático */
+.svg-bar-chart .label {
+    fill: #c0c0c0;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+.svg-bar-chart .bar {
+    fill: #1e90ff;
+    rx: 3px; /* bordas arredondadas */
+    ry: 3px;
+}
+
+/* Estilos dos Gráficos SVG Estáticos */
+.static-line-chart .grid-line { stroke: #0f3460; stroke-dasharray: 2,2; }
+.static-line-chart .axis-line { stroke: #5a688a; }
+.static-line-chart .axis-label { fill: #c0c0c0; font-size: 12px; }
+.static-line-chart .data-line { stroke: #e94560; stroke-width: 2.5; fill: none; }
+.static-line-chart .data-point { fill: #e94560; }
+.static-line-chart .fill-gradient { fill: url(#line-chart-gradient); }
+        
+/* Responsividade */
+@media (max-width: 1200px) {
+    .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+    .table-card.full-width, .sources-card { grid-column: span 2; }
+}
+@media (max-width: 768px) {
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .card, .line-chart-card, .doughnut-chart-card, .bar-chart-card, .table-card, .table-card.full-width, .sources-card {
+        grid-column: span 1;
+    }
+    header { flex-direction: column; align-items: flex-start; gap: 10px;}
+}
