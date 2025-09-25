@@ -9,8 +9,8 @@ https://www.threatminer.org/api.php  (ThreatMiner is an open-source threat intel
 Estratégia Nacional de Cibersegurança (E-Ciber) 
 https://www.gov.br/gsi/pt-br/assuntos/seguranca-da-informacao-e-cibernetica/estrategia-nacional-de-ciberseguranca-eciber
 
-
 https://sites.tcu.gov.br/listadealtorisco/seguranca_da_informacao_e_seguranca_cibernetica.html
 
+https://www.cvedetails.com/
 
 .....
