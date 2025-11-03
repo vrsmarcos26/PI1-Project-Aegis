@@ -68,7 +68,7 @@ A organização das pastas seguirá a seguinte estrutura inicial para manter o p
 -   👨‍💻 **/src:** Código-fonte principal da aplicação.   
 
 
-###📈 Status do Projeto
+### 📈 Status do Projeto
 🚧 Em andamento
 ---
 
