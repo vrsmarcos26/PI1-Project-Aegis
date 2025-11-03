@@ -1,1 +1,100 @@
 Cronograma de desenvolvimento com sprints definidos
+
+📅 Duração total do projeto:
+
+8 semanas (divididas em 4 sprints quinzenais)
+
+🎯 Objetivo geral:
+
+Desenvolver o sistema Aegis, uma aplicação voltada à segurança residencial, com autenticação de usuários, controle de sensores e visualização de alertas em tempo real.
+
+🧩 Sprint 1 – Planejamento e Configuração do Ambiente
+
+Duração: Semana 1 a 2
+Objetivos:
+
+Definir escopo, requisitos funcionais e não funcionais do sistema.
+
+Criar o repositório GitHub e padronizar o fluxo de commits (GitFlow).
+
+Configurar ambiente de desenvolvimento (VSCode, Node.js, dependências).
+
+Criar wireframe ou protótipo inicial das telas.
+
+Entregas:
+
+Documento de requisitos.
+
+Protótipo navegável (Figma).
+
+Ambiente de desenvolvimento configurado e testado.
+
+⚙️ Sprint 2 – Estrutura inicial e banco de dados
+
+Duração: Semana 3 a 4
+Objetivos:
+
+Criar estrutura base do front-end e back-end.
+
+Definir modelo de dados (entidades, relacionamentos).
+
+Configurar banco de dados (MySQL, SQLite ou MongoDB).
+
+Implementar rotas iniciais e API base (cadastro e login de usuário).
+
+Entregas:
+
+Modelo lógico do banco de dados.
+
+API funcional com endpoints básicos.
+
+Página de login e cadastro conectadas à API.
+
+🔒 Sprint 3 – Funcionalidades principais e integração
+
+Duração: Semana 5 a 6
+Objetivos:
+
+Implementar as funcionalidades principais do sistema (monitoramento, alertas, sensores, etc.).
+
+Criar dashboard com visualização de eventos.
+
+Implementar autenticação e controle de acesso.
+
+Integrar front-end e back-end.
+
+Entregas:
+
+Funcionalidades principais implementadas.
+
+Interface conectada ao back-end.
+
+Testes de integração e usabilidade.
+
+🚀 Sprint 4 – Testes, refino e documentação
+
+Duração: Semana 7 a 8
+Objetivos:
+
+Testar todas as funcionalidades (unitários e integrados).
+
+Corrigir bugs e refatorar código.
+
+Criar documentação técnica e manual do usuário.
+
+Preparar apresentação final do projeto.
+
+Entregas:
+
+Projeto funcional e testado.
+
+Documentação e README completos.
+
+Apresentação final e vídeo demonstrativo.
+
+📊 Resumo das entregas por sprint
+Sprint	Período	Foco Principal	Entregas
+1	Semanas 1–2	Planejamento e ambiente	Requisitos, protótipo, setup
+2	Semanas 3–4	Estrutura e banco de dados	Modelagem, API base
+3	Semanas 5–6	Funcionalidades principais	Dashboard, autenticação
+4	Semanas 7–8	Testes e finalização	Refino, documentação, apresentação
