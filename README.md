@@ -67,9 +67,11 @@ A organização das pastas seguirá a seguinte estrutura inicial para manter o p
 -   🕹️ **/prototype:** Espaço para protótipos executáveis e provas de conceito.
 -   👨‍💻 **/src:** Código-fonte principal da aplicação.   
 
+---
 
 ### 📈 Status do Projeto
-🚧 Em andamento
+#### 🚧 Em andamento
+
 ---
 
 ### 📝 Licença
