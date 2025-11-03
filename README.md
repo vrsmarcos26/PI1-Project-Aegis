@@ -65,8 +65,11 @@ A organização das pastas seguirá a seguinte estrutura inicial para manter o p
 -   📄 **/docs:** Centraliza toda a documentação do projeto, incluindo atas de reunião, especificações e este README.
 -   🗄️ **/database:** Scripts de criação, migração e seeds para o banco de dados.
 -   🕹️ **/prototype:** Espaço para protótipos executáveis e provas de conceito.
--   👨‍💻 **/src:** Código-fonte principal da aplicação.
+-   👨‍💻 **/src:** Código-fonte principal da aplicação.   
 
+
+###📈 Status do Projeto
+🚧 Em andamento
 ---
 
 ### 📝 Licença
