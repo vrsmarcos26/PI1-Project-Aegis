@@ -1,100 +1,140 @@
-Cronograma de desenvolvimento com sprints definidos
+Cronograma de Desenvolvimento — Projeto Integrador I: Project Aegis
+Duração total
 
-📅 Duração total do projeto:
+16 semanas (semestre completo)
+Organizado em 6 sprints, cada uma com entregas teóricas e analíticas.
 
-8 semanas (divididas em 4 sprints quinzenais)
+ Sprint 1 – Planejamento e Definição do Tema
 
-🎯 Objetivo geral:
-
-Desenvolver o sistema Aegis, uma aplicação voltada à segurança residencial, com autenticação de usuários, controle de sensores e visualização de alertas em tempo real.
-
-🧩 Sprint 1 – Planejamento e Configuração do Ambiente
-
-Duração: Semana 1 a 2
+Período: Semanas 1 a 2
 Objetivos:
 
-Definir escopo, requisitos funcionais e não funcionais do sistema.
+Escolher o tema central: inteligência de ameaças cibernéticas e centralização de dados.
 
-Criar o repositório GitHub e padronizar o fluxo de commits (GitFlow).
+Definir o problema a ser estudado: fragmentação e falta de integração entre fontes de informações de segurança.
 
-Configurar ambiente de desenvolvimento (VSCode, Node.js, dependências).
+Determinar o objetivo geral e os objetivos específicos do projeto.
 
-Criar wireframe ou protótipo inicial das telas.
+Estruturar a equipe e os papéis de cada integrante.
 
 Entregas:
 
-Documento de requisitos.
+Documento de escopo inicial.
 
-Protótipo navegável (Figma).
+Definição de papéis da equipe.
 
-Ambiente de desenvolvimento configurado e testado.
+Mapa conceitual do problema.
 
-⚙️ Sprint 2 – Estrutura inicial e banco de dados
+ Sprint 2 – Pesquisa Teórica e Levantamento de Fontes
 
-Duração: Semana 3 a 4
+Período: Semanas 3 a 5
 Objetivos:
 
-Criar estrutura base do front-end e back-end.
+Realizar levantamento bibliográfico sobre inteligência de ameaças, cibersegurança e gestão de informações.
 
-Definir modelo de dados (entidades, relacionamentos).
+Identificar e descrever fontes de dados públicas (CVE, NVD, MITRE ATT&CK, etc.) que serviriam de base para o painel proposto.
 
-Configurar banco de dados (MySQL, SQLite ou MongoDB).
+Coletar referências acadêmicas e técnicas relevantes.
 
-Implementar rotas iniciais e API base (cadastro e login de usuário).
+Analisar as limitações atuais de integração entre essas fontes.
 
 Entregas:
 
-Modelo lógico do banco de dados.
+Revisão teórica (mínimo 5 fontes).
 
-API funcional com endpoints básicos.
+Quadro comparativo das principais fontes de dados.
 
-Página de login e cadastro conectadas à API.
+Referências formatadas segundo as normas da instituição.
 
-🔒 Sprint 3 – Funcionalidades principais e integração
+ Sprint 3 – Análise do Problema e Justificativa
 
-Duração: Semana 5 a 6
+Período: Semanas 6 a 8
 Objetivos:
 
-Implementar as funcionalidades principais do sistema (monitoramento, alertas, sensores, etc.).
+Analisar como a fragmentação de dados impacta a identificação de ameaças cibernéticas.
 
-Criar dashboard com visualização de eventos.
+Relacionar os conceitos teóricos com a realidade de coleta e gestão de informações.
 
-Implementar autenticação e controle de acesso.
+Elaborar a justificativa do projeto, destacando sua relevância social e técnica.
 
-Integrar front-end e back-end.
+Apresentar um texto introdutório sobre a importância da integração de dados para a segurança digital.
 
 Entregas:
 
-Funcionalidades principais implementadas.
+Documento de justificativa e fundamentação teórica.
 
-Interface conectada ao back-end.
+Texto explicativo sobre o impacto da fragmentação de dados.
 
-Testes de integração e usabilidade.
+Revisão e feedback parcial com o orientador.
 
-🚀 Sprint 4 – Testes, refino e documentação
+Sprint 4 – Estrutura Conceitual do Painel de Inteligência
 
-Duração: Semana 7 a 8
+Período: Semanas 9 a 11
 Objetivos:
 
-Testar todas as funcionalidades (unitários e integrados).
+Descrever como o painel de inteligência de ameaças funcionaria em teoria.
 
-Corrigir bugs e refatorar código.
+Definir quais tipos de informações ele reuniria (ex.: categorias de ataques, níveis de risco, setores afetados).
 
-Criar documentação técnica e manual do usuário.
+Criar diagramas ou fluxogramas conceituais para representar o fluxo de dados.
 
-Preparar apresentação final do projeto.
+Explicar como o painel facilitaria a visualização e compreensão das ameaças.
 
 Entregas:
 
-Projeto funcional e testado.
+Esboço teórico do painel (modelo conceitual).
 
-Documentação e README completos.
+Diagramas ou fluxos de dados (conceituais, não técnicos).
 
-Apresentação final e vídeo demonstrativo.
+Texto explicativo das seções e indicadores do painel.
 
-📊 Resumo das entregas por sprint
+ Sprint 5 – Interpretação dos Resultados e Conclusões Parciais
+
+Período: Semanas 12 a 14
+Objetivos:
+
+Discutir as descobertas da pesquisa e das análises teóricas.
+
+Relacionar os resultados com a proposta do painel Aegis.
+
+Definir indicadores e métricas que poderiam ser utilizados futuramente para medir ameaças.
+
+Sintetizar as contribuições do projeto até o momento.
+
+Entregas:
+
+Relatório analítico intermediário.
+
+Lista de indicadores conceituais.
+
+Discussão dos resultados teóricos.
+
+ Sprint 6 – Consolidação e Apresentação Final
+
+Período: Semanas 15 a 16
+Objetivos:
+
+Revisar todos os documentos produzidos nas sprints anteriores.
+
+Redigir o relatório final do Projeto Integrador I, com introdução, justificativa, referencial teórico, metodologia, resultados e conclusões.
+
+Elaborar a apresentação oral e/ou em slides para a banca.
+
+Organizar os arquivos finais no repositório GitHub.
+
+Entregas:
+
+Relatório final completo (formato acadêmico).
+
+Slides de apresentação.
+
+Documentação organizada no repositório.
+
+ Resumo das Sprints
 Sprint	Período	Foco Principal	Entregas
-1	Semanas 1–2	Planejamento e ambiente	Requisitos, protótipo, setup
-2	Semanas 3–4	Estrutura e banco de dados	Modelagem, API base
-3	Semanas 5–6	Funcionalidades principais	Dashboard, autenticação
-4	Semanas 7–8	Testes e finalização	Refino, documentação, apresentação
+1	Semanas 1–2	Planejamento e definição do tema	Escopo inicial e mapa conceitual
+2	Semanas 3–5	Pesquisa teórica e fontes de dados	Revisão bibliográfica e quadro comparativo
+3	Semanas 6–8	Análise e justificativa	Fundamentação teórica e texto explicativo
+4	Semanas 9–11	Estrutura conceitual do painel	Diagramas e modelo teórico
+5	Semanas 12–14	Discussão dos resultados	Relatório analítico e indicadores teóricos
+6	Semanas 15–16	Consolidação e apresentação	Relatório final e slides
