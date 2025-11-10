@@ -1,7 +1,75 @@
-/* Importando uma fonte mais moderna (Roboto) */
+/* ==================================================================
+   PROJECT AEGIS - FOLHA DE ESTILOS PRINCIPAL
+   ================================================================== */
+
+/* --- 1. Importação da Fonte --- */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-/* Reset Básico e Estilo Geral */
+/* --- 2. Variáveis de Tema (Theming) --- */
+:root {
+    /* Tema Claro (Padrão) */
+    --cor-fundo-principal: #f0f2f5;
+    --cor-fundo-sidebar: #001529;
+    --cor-fundo-card: #ffffff;
+    --cor-fundo-hover: #f8f9fa;
+    --cor-fundo-select: #ffffff;
+    --cor-fundo-tabela-header: #fafafa;
+    
+    --cor-texto-principal: #333;
+    --cor-texto-secundario: #555;
+    --cor-texto-sidebar: rgba(255, 255, 255, 0.65);
+    --cor-texto-sidebar-hover: #ffffff;
+    --cor-texto-kpi: #003a8c;
+
+    --cor-borda: #d9d9d9;
+    --cor-borda-tabela: #f0f0f0;
+    --cor-borda-sidebar: transparent;
+    --cor-sombra: rgba(0,0,0,0.06);
+    
+    --cor-primaria: #1890ff; /* Azul principal (botões, barras) */
+    --cor-secundaria: #00c49f; /* Verde (linha do gráfico) */
+    --cor-perigo: #ff4d4f; /* Vermelho (sparkline vulns) */
+    --cor-aviso: #faad14; /* Amarelo/Laranja (sparkline breaches) */
+    --cor-neutra: #d9d9d9; /* Cinza (legenda baixa) */
+    --cor-barra-vertical: #ff8042;
+
+    --cor-grafico-grid: #e8e8e8;
+    --cor-grafico-axis: #ccc;
+}
+
+body.dark-theme {
+    /* Tema Escuro (Ativado via JS) */
+    --cor-fundo-principal: #0d1117;
+    --cor-fundo-sidebar: #010409;
+    --cor-fundo-card: #161b22;
+    --cor-fundo-hover: #21262d;
+    --cor-fundo-select: #21262d;
+    --cor-fundo-tabela-header: #161b22;
+    
+    --cor-texto-principal: #f0f6fc;
+    --cor-texto-secundario: #8b949e;
+    --cor-texto-sidebar: #8b949e;
+    --cor-texto-sidebar-hover: #f0f6fc;
+    --cor-texto-kpi: #58a6ff; /* Azul neon */
+
+    --cor-borda: #30363d;
+    --cor-borda-tabela: #30363d;
+    --cor-borda-sidebar: #30363d;
+    --cor-sombra: rgba(0,0,0,0); /* Sem sombra no escuro */
+
+    --cor-primaria: #58a6ff;
+    --cor-secundaria: #3FB950; /* Verde neon */
+    --cor-perigo: #F85149; /* Vermelho neon */
+    --cor-aviso: #D29922; /* Amarelo neon */
+    --cor-neutra: #8b949e;
+    --cor-barra-vertical: #F85149; /* Reutilizando o vermelho */
+
+    --cor-grafico-grid: #30363d;
+    --cor-grafico-axis: #8b949e;
+}
+
+
+/* --- 3. Reset Básico e Estilo Geral --- */
 * {
     margin: 0;
     padding: 0;
@@ -10,25 +78,28 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
+    background-color: var(--cor-fundo-principal);
+    color: var(--cor-texto-principal);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .dashboard-container {
     display: flex;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 }
 
-/* --- Barra Lateral (Sidebar) --- */
+/* --- 4. Barra Lateral (Sidebar) --- */
 .sidebar {
     width: 240px;
-    background-color: #001529;
-    color: rgba(255, 255, 255, 0.65);
+    background-color: var(--cor-fundo-sidebar);
+    color: var(--cor-texto-sidebar);
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    transition: width 0.3s;
+    border-right: 1px solid var(--cor-borda-sidebar);
+    transition: width 0.3s, background-color 0.3s;
 }
 
 .sidebar-header {
@@ -38,19 +109,20 @@ body {
 }
 
 .sidebar-header h1 {
-    color: #fff;
+    color: var(--cor-texto-sidebar-hover);
     font-size: 1.8em;
 }
 
 .sidebar-nav {
     flex-grow: 1;
     padding-top: 20px;
+    overflow-y: auto;
 }
 
 .sidebar-nav a {
     display: block;
     padding: 15px 20px;
-    color: rgba(255, 255, 255, 0.65);
+    color: var(--cor-texto-sidebar);
     text-decoration: none;
     font-weight: 500;
     border-left: 3px solid transparent;
@@ -59,13 +131,13 @@ body {
 
 .sidebar-nav a:hover {
     background-color: rgba(24, 144, 255, 0.2);
-    color: #fff;
+    color: var(--cor-texto-sidebar-hover);
 }
 
 .sidebar-nav a.active {
-    background-color: #1890ff;
-    color: #fff;
-    border-left-color: #00c49f;
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-sidebar-hover);
+    border-left-color: var(--cor-secundaria);
 }
 
 .sidebar-footer {
@@ -75,12 +147,13 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* --- Conteúdo Principal --- */
+/* --- 5. Conteúdo Principal --- */
 .main-content {
     flex-grow: 1;
-    background-color: #f0f2f5;
+    background-color: var(--cor-fundo-principal);
     padding: 24px;
     overflow-y: auto;
+    transition: background-color 0.3s;
 }
 
 .main-header {
@@ -92,19 +165,64 @@ body {
 
 .main-header h2 {
     font-size: 1.6em;
-    color: #333;
+    color: var(--cor-texto-principal);
     font-weight: 500;
 }
 
-.filter-container select {
-    padding: 8px 12px;
-    border: 1px solid #d9d9d9;
-    border-radius: 6px;
-    background-color: #fff;
-    font-size: 0.9em;
+/* Container para os controles do header */
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Espaço entre o filtro e o botão */
 }
 
-/* --- KPIs --- */
+.header-controls select {
+    padding: 8px 12px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    background-color: var(--cor-fundo-select);
+    color: var(--cor-texto-principal);
+    font-size: 0.9em;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Estilo do botão de tema (movido do HTML para cá) */
+.theme-toggle-button {
+    padding: 8px 12px;
+    background-color: var(--cor-fundo-select);
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--cor-texto-principal);
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.theme-toggle-button:hover {
+    background-color: var(--cor-fundo-hover);
+}
+
+
+/* --- 6. Cards e KPIs --- */
+.card {
+    background-color: var(--cor-fundo-card);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px var(--cor-sombra), 0 1px 2px var(--cor-sombra);
+    border: 1px solid var(--cor-borda);
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.card h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--cor-texto-principal);
+}
+
 .kpi-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -113,51 +231,37 @@ body {
 }
 
 .kpi-card {
-    display: flex;
+    flex-direction: row; /* Sobrescreve o flex-direction do .card */
     justify-content: space-between;
     align-items: center;
 }
 
 .kpi-text p {
     font-size: 0.9em;
-    color: #555;
+    color: var(--cor-texto-secundario);
     margin-bottom: 8px;
 }
 
 .kpi-text h2 {
     font-size: 2.2em;
     font-weight: 700;
-    color: #003a8c;
+    color: var(--cor-texto-kpi);
 }
 
 .kpi-sparkline {
     width: 100px;
     height: 40px;
 }
-.kpi-sparkline.vulns { stroke: #ff4d4f; }
-.kpi-sparkline.breaches { stroke: #faad14; }
+/* As cores dos sparklines são definidas por 'stroke' */
+.kpi-sparkline.vulns { stroke: var(--cor-perigo); }
+.kpi-sparkline.breaches { stroke: var(--cor-aviso); }
 
-/* --- Grid do Dashboard --- */
+
+/* --- 7. Grid do Dashboard (Gráficos) --- */
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-}
-
-.card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.12);
-    display: flex;
-    flex-direction: column;
-}
-
-.card h3 {
-    margin-top: 0;
-    margin-bottom: 16px;
-    font-size: 1.1em;
-    font-weight: 500;
 }
 
 .grid-col-2 { grid-column: span 2; }
@@ -172,41 +276,59 @@ body {
     min-height: 250px;
 }
 
-/* Estilos dos Gráficos Estáticos */
-.static-line-chart .grid-line { stroke: #e8e8e8; stroke-dasharray: 2,2; }
-.static-line-chart .axis-line { stroke: #ccc; }
-.static-line-chart .axis-label { fill: #555; font-size: 12px; }
-.static-line-chart .data-line { stroke: #00c49f; stroke-width: 2.5; fill: none; }
-.static-line-chart .data-point { fill: #00c49f; }
+/* --- 8. Estilos dos Gráficos (SVG e HTML) --- */
+
+/* Gráfico de Linha */
+.static-line-chart .grid-line { stroke: var(--cor-grafico-grid); stroke-dasharray: 2,2; }
+.static-line-chart .axis-line { stroke: var(--cor-grafico-axis); }
+.static-line-chart .axis-label { fill: var(--cor-texto-secundario); font-size: 12px; }
+.static-line-chart .data-line { stroke: var(--cor-secundaria); stroke-width: 2.5; fill: none; }
+.static-line-chart .data-point { fill: var(--cor-secundaria); }
 .static-line-chart .fill-gradient { fill: url(#line-chart-gradient); }
 
+/* Gráfico de Rosca (Donut) */
 .chart-wrapper { display: flex; align-items: center; justify-content: center; height: 100%; gap: 20px; }
 .donut { width: 60%; height: auto; }
+.donut-hole { fill: var(--cor-fundo-card); }
+.donut-ring { fill: transparent; stroke: var(--cor-fundo-principal); stroke-width: 3.5; }
 .donut-segment { transform-origin: center; }
-.segment-critica { stroke: #ff4d4f; }
-.segment-alta { stroke: #faad14; }
-.segment-media { stroke: #1890ff; }
-.chart-legend p { margin: 5px 0; font-size: 0.8em; }
+.segment-critica { stroke: var(--cor-perigo); }
+.segment-alta { stroke: var(--cor-aviso); }
+.segment-media { stroke: var(--cor-primaria); }
+
+.chart-legend p { margin: 5px 0; font-size: 0.8em; color: var(--cor-texto-secundario); }
 .legend-color { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
-.legend-critica { background-color: #ff4d4f; }
-.legend-alta { background-color: #faad14; }
-.legend-media { background-color: #1890ff; }
-.legend-baixa { background-color: #d9d9d9; }
+.legend-critica { background-color: var(--cor-perigo); }
+.legend-alta { background-color: var(--cor-aviso); }
+.legend-media { background-color: var(--cor-primaria); }
+.legend-baixa { background-color: var(--cor-neutra); }
 
-.bar-chart-container { width: 100%; color: #555; font-size: 0.9em; display: flex; flex-direction: column; justify-content: space-around; }
-.bar-chart-container p { margin: 6px 0; }
-.bar-h { display: block; height: 12px; background-color: #1890ff; border-radius: 5px; margin-top: 4px; }
+/* Gráfico de Barras (SVG) */
+.svg-bar-chart .label {
+    fill: var(--cor-texto-secundario);
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+.svg-bar-chart .bar {
+    fill: var(--cor-primaria);
+    rx: 3px; /* bordas arredondadas */
+    ry: 3px;
+}
 
+/* Gráfico de Barras (HTML) */
 .bar-chart-v-container { width: 100%; height: 100%; display: flex; justify-content: space-around; align-items: flex-end; padding: 0 10px; }
-.bar-v { width: 12%; background-color: #ff8042; border-radius: 5px 5px 0 0; position: relative; text-align: center; }
-.bar-v .label { position: absolute; bottom: -20px; width: 100%; left: 0; font-size: 12px; color: #555; }
+.bar-v { width: 12%; background-color: var(--cor-barra-vertical); border-radius: 5px 5px 0 0; position: relative; text-align: center; }
+.bar-v .label { position: absolute; bottom: -20px; width: 100%; left: 0; font-size: 12px; color: var(--cor-texto-secundario); }
 
+
+/* --- 9. Tabela --- */
 table { width: 100%; border-collapse: collapse; }
-th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #f0f0f0; }
-thead th { background-color: #fafafa; font-weight: 500; }
-tbody tr:hover { background-color: #f8f9fa; }
+th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid var(--cor-borda-tabela); }
+thead th { background-color: var(--cor-fundo-tabela-header); font-weight: 500; }
+tbody tr:hover { background-color: var(--cor-fundo-hover); }
 
-/* Responsividade */
+
+/* --- 10. Responsividade --- */
 @media (max-width: 1200px) {
     .dashboard-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -220,49 +342,17 @@ tbody tr:hover { background-color: #f8f9fa; }
        padding-right: 0;
     }
      .sidebar-nav a::before {
-        content: "●";
+        content: "●"; /* Placeholder para ícone */
         font-size: 1.5rem;
-    }
+     }
     .dashboard-grid { grid-template-columns: 1fr; }
     .grid-col-2, .grid-col-3 { grid-column: span 1; }
 }
 @media (max-width: 768px) {
-     .dashboard-container { flex-direction: column; }
-     .sidebar { width: 100%; height: auto; flex-direction: row; }
-     .sidebar-nav { display: flex; flex-grow: 1; justify-content: center; }
+     .dashboard-container { flex-direction: column; height: auto; }
+     .sidebar { width: 100%; height: auto; flex-direction: row; overflow-x: auto; }
+     .sidebar-nav { display: flex; flex-direction: row; flex-grow: 1; justify-content: center; padding-top: 0; }
      .sidebar-header, .sidebar-footer { display: none; }
      .main-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-}
-
-/* Gráfico de Barras SVG Estático */
-.svg-bar-chart .label {
-    fill: #c0c0c0;
-    font-size: 14px;
-    font-family: Arial, sans-serif;
-}
-.svg-bar-chart .bar {
-    fill: #1e90ff;
-    rx: 3px; /* bordas arredondadas */
-    ry: 3px;
-}
-
-/* Estilos dos Gráficos SVG Estáticos */
-.static-line-chart .grid-line { stroke: #0f3460; stroke-dasharray: 2,2; }
-.static-line-chart .axis-line { stroke: #5a688a; }
-.static-line-chart .axis-label { fill: #c0c0c0; font-size: 12px; }
-.static-line-chart .data-line { stroke: #e94560; stroke-width: 2.5; fill: none; }
-.static-line-chart .data-point { fill: #e94560; }
-.static-line-chart .fill-gradient { fill: url(#line-chart-gradient); }
-        
-/* Responsividade */
-@media (max-width: 1200px) {
-    .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
-    .table-card.full-width, .sources-card { grid-column: span 2; }
-}
-@media (max-width: 768px) {
-    .dashboard-grid { grid-template-columns: 1fr; }
-    .card, .line-chart-card, .doughnut-chart-card, .bar-chart-card, .table-card, .table-card.full-width, .sources-card {
-        grid-column: span 1;
-    }
-    header { flex-direction: column; align-items: flex-start; gap: 10px;}
+     .header-controls { width: 100%; justify-content: space-between; }
 }
