@@ -4,10 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protótipo Profissional | Project Aegis Dashboard</title>
+    <!-- Seu CSS principal (com o código do .dark-theme no final) -->
     <link rel="stylesheet" href="style.css">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Estilos para o novo botão de toggle -->
+    <style>
+        .theme-toggle-button {
+            padding: 8px 12px;
+            background-color: #fff;
+            border: 1px solid #d9d9d9;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            margin-left: 16px; /* Adiciona espaço entre o filtro e o botão */
+        }
+        .theme-toggle-button:hover {
+            background-color: #f0f2f5;
+        }
+
+        /* Estilo do botão quando o tema escuro estiver ativo */
+        .dark-theme .theme-toggle-button {
+            background-color: #21262d;
+            border-color: #30363d;
+            color: #f0f6fc;
+        }
+        .dark-theme .theme-toggle-button:hover {
+            background-color: #30363d;
+        }
+    </style>
 </head>
 <body>
     <div class="dashboard-container">
@@ -30,12 +60,19 @@
         <main class="main-content">
             <header class="main-header">
                 <h2>Painel de Inteligência de Ameaças</h2>
-                <div class="filter-container">
+                
+                <!-- Container de filtros e botão de tema -->
+                <div class="filter-container" style="display: flex; align-items: center;">
                     <select id="period-filter">
                         <option value="30d">Últimos 30 dias</option>
                         <option value="90d">Últimos 90 dias</option>
                         <option value="1ano">Último Ano</option>
                     </select>
+
+                    <!-- NOVO BOTÃO DE TEMA -->
+                    <button id="theme-toggle" class="theme-toggle-button">
+                        Alternar Tema
+                    </button>
                 </div>
             </header>
 
@@ -92,17 +129,17 @@
                     <h3>Distribuição de Severidade</h3>
                     <div class="chart-wrapper">
                          <svg width="100%" height="100%" viewBox="0 0 42 42" class="donut">
-                           <circle class="donut-hole" cx="21" cy="21" r="15.915" fill="#fff"></circle>
-                           <circle class="donut-ring" cx="21" cy="21" r="15.915" fill="transparent" stroke="#f0f2f5" stroke-width="3.5"></circle>
-                           <circle class="donut-segment segment-critica" cx="21" cy="21" r="15.915" fill="transparent" stroke-width="3.5" stroke-dasharray="20 80" stroke-dashoffset="25"></circle>
-                           <circle class="donut-segment segment-alta" cx="21" cy="21" r="15.915" fill="transparent" stroke-width="3.5" stroke-dasharray="45 55" stroke-dashoffset="5"></circle>
-                           <circle class="donut-segment segment-media" cx="21" cy="21" r="15.915" fill="transparent" stroke-width="3.5" stroke-dasharray="25 75" stroke-dashoffset="-40"></circle>
+                            <circle class="donut-hole" cx="21" cy="21" r="15.915" fill="#fff"></circle>
+                            <circle class="donut-ring" cx="21" cy="21" r="15.915" fill="transparent" stroke="#f0f2f5" stroke-width="3.5"></circle>
+                            <circle class="donut-segment segment-critica" cx="21" cy="21" r="15.915" fill="transparent" stroke-width="3.5" stroke-dasharray="20 80" stroke-dashoffset="25"></circle>
+                            <circle class="donut-segment segment-alta" cx="21" cy="21" r="15.915" fill="transparent" stroke-width="3.5" stroke-dasharray="45 55" stroke-dashoffset="5"></circle>
+                            <circle class="donut-segment segment-media" cx="21" cy="21" r="15.915" fill="transparent" stroke-width="3.5" stroke-dasharray="25 75" stroke-dashoffset="-40"></circle>
                          </svg>
                          <div class="chart-legend">
-                            <p><span class="legend-color legend-critica"></span>Crítica</p>
-                            <p><span class="legend-color legend-alta"></span>Alta</p>
-                            <p><span class="legend-color legend-media"></span>Média</p>
-                            <p><span class="legend-color legend-baixa"></span>Baixa</p>
+                             <p><span class="legend-color legend-critica"></span>Crítica</p>
+                             <p><span class="legend-color legend-alta"></span>Alta</p>
+                             <p><span class="legend-color legend-media"></span>Média</p>
+                             <p><span class="legend-color legend-baixa"></span>Baixa</p>
                          </div>
                     </div>
                 </div>
@@ -156,6 +193,17 @@
             </section>
         </main>
     </div>
-</body>
 
+    <!-- SCRIPT DE TOGGLE (Adicionado ao final do body) -->
+    <script>
+        // 1. Encontrar o botão
+        const toggleButton = document.getElementById('theme-toggle');
+
+        // 2. Adicionar um "ouvinte" de clique no botão
+        toggleButton.addEventListener('click', function() {
+            // 3. Quando clicado, ele vai "alternar" (toggle) a classe 'dark-theme' no <body>
+            document.body.classList.toggle('dark-theme');
+        });
+    </script>
+</body>
 </html>
