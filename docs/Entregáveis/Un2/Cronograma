@@ -1,1 +1,84 @@
-
+Cronograma de Desenvolvimento — Projeto
+Integrador I: Project Aegis
+Duração total: 16 semanas (semestre completo)
+Organizado em 6 sprints, cada uma com entregas teóricas e analíticas.
+Sprint 1 – Planejamento e Definição do Tema
+Período: Semanas 1 a 2
+Objetivos:
+- Escolher o tema central: inteligência de ameaças cibernéticas e centralização de dados.
+- Definir o problema a ser estudado: fragmentação e falta de integração entre fontes de
+informações de segurança.
+- Determinar o objetivo geral e os objetivos específicos do projeto.
+- Estruturar a equipe e os papéis de cada integrante.
+Entregas:
+- Documento de escopo inicial.
+- Definição de papéis da equipe.
+- Mapa conceitual do problema.
+Sprint 2 – Pesquisa Teórica e Levantamento de Fontes
+Período: Semanas 3 a 5
+Objetivos:
+- Realizar levantamento bibliográfico sobre inteligência de ameaças, cibersegurança e gestão de
+informações.
+- Identificar e descrever fontes de dados públicas (CVE, NVD, MITRE ATT&CK;, etc.) que serviriam
+de base para o painel proposto.
+- Coletar referências acadêmicas e técnicas relevantes.
+- Analisar as limitações atuais de integração entre essas fontes.
+Entregas:
+- Revisão teórica (mínimo 5 fontes).
+- Quadro comparativo das principais fontes de dados.
+- Referências formatadas segundo as normas da instituição.
+Sprint 3 – Análise do Problema e Justificativa
+Período: Semanas 6 a 8
+Objetivos:
+- Analisar como a fragmentação de dados impacta a identificação de ameaças cibernéticas.
+- Relacionar os conceitos teóricos com a realidade de coleta e gestão de informações.
+- Elaborar a justificativa do projeto, destacando sua relevância social e técnica.
+- Apresentar um texto introdutório sobre a importância da integração de dados para a segurança
+digital.
+Entregas:
+- Documento de justificativa e fundamentação teórica.
+- Texto explicativo sobre o impacto da fragmentação de dados.
+- Revisão e feedback parcial com o orientador.
+Sprint 4 – Estrutura Conceitual do Painel de Inteligência
+Período: Semanas 9 a 11
+Objetivos:
+- Descrever como o painel de inteligência de ameaças funcionaria em teoria.
+- Definir quais tipos de informações ele reuniria (ex.: categorias de ataques, níveis de risco, setores
+afetados).
+- Criar diagramas ou fluxogramas conceituais para representar o fluxo de dados.
+- Explicar como o painel facilitaria a visualização e compreensão das ameaças.
+Entregas:
+- Esboço teórico do painel (modelo conceitual).
+- Diagramas ou fluxos de dados (conceituais, não técnicos).
+- Texto explicativo das seções e indicadores do painel.
+Sprint 5 – Interpretação dos Resultados e Conclusões Parciais
+Período: Semanas 12 a 14
+Objetivos:
+- Discutir as descobertas da pesquisa e das análises teóricas.
+- Relacionar os resultados com a proposta do painel Aegis.
+- Definir indicadores e métricas que poderiam ser utilizados futuramente para medir ameaças.
+- Sintetizar as contribuições do projeto até o momento.
+Entregas:
+- Relatório analítico intermediário.
+- Lista de indicadores conceituais.
+- Discussão dos resultados teóricos.
+Sprint 6 – Consolidação e Apresentação Final
+Período: Semanas 15 a 16
+Objetivos:
+- Revisar todos os documentos produzidos nas sprints anteriores.
+- Redigir o relatório final do Projeto Integrador I, com introdução, justificativa, referencial teórico,
+metodologia, resultados e conclusões.
+- Elaborar a apresentação oral e/ou em slides para a banca.
+- Organizar os arquivos finais no repositório GitHub.
+Entregas:
+- Relatório final completo (formato acadêmico).
+- Slides de apresentação.
+- Documentação organizada no repositório.
+Resumo das Sprints
+Sprint Período Foco Principal Entregas
+1 Semanas 1–2 Planejamento e definição do tema Escopo inicial e mapa conceitual
+2 Semanas 3–5 Pesquisa teórica e fontes de dados Revisão bibliográfica e quadro comparativo
+3 Semanas 6–8 Análise e justificativa Fundamentação teórica e texto explicativo
+4 Semanas 9–11 Estrutura conceitual do painel Diagramas e modelo teórico
+5 Semanas 12–14 Discussão dos resultados Relatório analítico e indicadores teóricos
+6 Semanas 15–16 Consolidação e apresentação Relatório final e slides
