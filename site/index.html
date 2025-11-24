@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Aegis Dashboard</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🛡️ Aegis</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="active" id="lbl-sidebar-dashboard">Dashboard Principal</a>
+                <a href="analise_cves.html" id="lbl-sidebar-analysis">Análise de CVEs</a>
+                <a href="vazamentos.html" id="lbl-sidebar-leaks">Vazamentos</a>
+                <a href="relatorios.html" id="lbl-sidebar-reports">Relatórios</a>
+                <a href="fontes.html" id="lbl-sidebar-settings">Fonte dos Dados</a>
+                <a href="https://github.com/vrsmarcos26/PI1-Project-Aegis" target="_blank" id="lbl-sidebar-collaborators">Colaboradores</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Project Aegis © 2025</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                
+                <div class="header-info">
+                    <h2 id="lbl-header-title">Painel de Inteligência de Ameaças</h2>
+                    <p id="data-update-notice" style="font-size: 0.9em; color: var(--cor-texto-secundario); margin-top: 5px;"></p>
+                </div>
+
+                <div class="header-controls">
+                    <select id="period-filter">
+                        <option value="30d" id="lbl-period-30d">Últimos 30 dias</option>
+                        <option value="90d" id="lbl-period-90d">Últimos 90 dias</option>
+                        <option value="1ano" id="lbl-period-1y">Último Ano</option>
+                    </select>
+                    
+                    <button id="theme-toggle" class="theme-toggle-button">
+                        Alternar Tema
+                    </button>
+
+                    <!-- Botões de Idioma -->
+                    <div class="lang-controls">
+                        <button class="lang-btn active" onclick="mudarIdioma('pt_br')">PT</button>
+                        <button class="lang-btn" onclick="mudarIdioma('en_us')">EN</button>
+                    </div>
+                </div>
+            </header>
+
+            <section class="kpi-grid">
+                <div class="card kpi-card">
+                    <div class="kpi-text">
+                        <p id="lbl-kpi-vulns">Novas Vulnerabilidades</p>
+                        <h2 id="kpi-novas-vulns">--</h2>
+                    </div>
+                    <div class="kpi-sparkline vulns">
+                        <svg viewBox="0 0 100 30"><polyline fill="none" stroke="currentColor" stroke-width="2" points="0,20 20,15 40,25 60,10 80,18 100,12 "/></svg>
+                    </div>
+                </div>
+                <div class="card kpi-card">
+                    <div class="kpi-text">
+                        <p id="lbl-kpi-leaks">Contas Vazadas</p>
+                        <h2 id="kpi-contas-vazadas">--</h2>
+                    </div>
+                     <div class="kpi-sparkline breaches">
+                        <svg viewBox="0 0 100 30"><polyline fill="none" stroke="currentColor" stroke-width="2" points="0,10 20,25 40,15 60,20 80,5 100,10 "/></svg>
+                    </div>
+                </div>
+                <div class="card kpi-card">
+                    <div class="kpi-text">
+                        <p id="lbl-kpi-threat">Ameaça Mais Comum</p>
+                        <h2 id="kpi-ameaca-comum">--</h2>
+                    </div>
+                </div>
+                <div class="card kpi-card">
+                     <div class="kpi-text">
+                        <p id="lbl-kpi-sector">Setor Mais Atacado</p>
+                        <h2 id="kpi-setor-atacado">--</h2>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="dashboard-grid">
+                <div class="card grid-col-2">
+                    <h3 id="lbl-chart-trend">Tendência de Vulnerabilidades Críticas</h3>
+                    <div class="chart-placeholder" style="height: 300px; position: relative;">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 id="lbl-chart-severity">Distribuição de Severidade</h3>
+                    <div class="chart-placeholder" style="height: 300px; position: relative;">
+                        <canvas id="donutChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card bar-chart-card">
+                    <h3 id="lbl-chart-sectors">Setores Mais Atacados (OTX)</h3>
+                    <div class="chart-placeholder" style="height: 300px; position: relative;">
+                        <canvas id="setoresChart"></canvas>
+                    </div>
+                </div>
+                <div class="card bar-chart-card">
+                    <h3 id="lbl-chart-countries">Top 5 Países (Origem de IoCs)</h3>
+                    <div class="chart-placeholder" style="height: 300px; position: relative;">
+                        <canvas id="paisesChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 id="lbl-chart-types">Principais Tipos de Vulnerabilidade</h3>
+                    <div class="chart-placeholder" style="height: 300px; position: relative;">
+                        <canvas id="tiposVulnChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card grid-col-3">
+                    <h3 id="lbl-table-title">Grandes Vazamentos de Dados Recentes</h3>
+                    <table id="tabela-vazamentos">
+                        <thead>
+                            <tr>
+                                <th id="lbl-col-company">Empresa</th>
+                                <th id="lbl-col-sector">Setor</th>
+                                <th id="lbl-col-accounts">Contas Afetadas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="3" id="lbl-table-loading">Carregando dados...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Importando o config ANTES do script -->
+    <script src="config.js"></script>
+    <script src="script.js" defer></script>
+</body>
+</html>

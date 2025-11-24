@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fontes de Dados | Project Aegis</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🛡️ Aegis</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" id="lbl-sidebar-dashboard">Dashboard Principal</a>
+                <a href="analise_cves.html" id="lbl-sidebar-analysis">Análise de CVEs</a>
+                <a href="vazamentos.html" id="lbl-sidebar-leaks">Vazamentos</a>
+                <a href="relatorios.html" id="lbl-sidebar-reports">Relatórios</a>
+                <!-- Item Ativo -->
+                <a href="fontes.html" class="active" id="lbl-sidebar-settings">Fonte dos Dados</a>
+                <a href="https://github.com/vrsmarcos26/PI1-Project-Aegis" target="_blank" id="lbl-sidebar-collaborators">Colaboradores</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Project Aegis © 2025</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h2 id="lbl-sources-title">Nossas Fontes de Inteligência</h2>
+                <div class="header-controls">
+                    <button id="theme-toggle" class="theme-toggle-button">
+                        Alternar Tema
+                    </button>
+                    <div class="lang-controls">
+                        <button class="lang-btn active" onclick="mudarIdioma('pt_br')">PT</button>
+                        <button class="lang-btn" onclick="mudarIdioma('en_us')">EN</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Grid de Fontes -->
+            <div class="sources-grid">
+                
+                <!-- CARD 1: NVD -->
+                <div class="card source-card">
+                    <div class="source-logo-container">
+                        <img src="https://www.google.com/s2/favicons?domain=nvd.nist.gov&sz=128" alt="Logo NIST NVD" class="source-logo">
+                    </div>
+                    <h3>NVD (NIST)</h3>
+                    <p class="source-desc" id="lbl-src-nvd-desc">National Vulnerability Database</p>
+                    <p class="source-detail" id="lbl-src-nvd-detail">Fonte primária do governo dos EUA para gerenciamento de dados de vulnerabilidades (CVEs).</p>
+                    <div class="source-tags">
+                        <span class="tag" id="lbl-src-nvd-tag1">Vulnerabilidades</span>
+                        <span class="tag" id="lbl-src-nvd-tag2">Scores CVSS</span>
+                    </div>
+                    <a href="https://nvd.nist.gov/" target="_blank" class="btn-source lbl-btn-visit">Visitar Fonte</a>
+                </div>
+
+                <!-- CARD 2: HIBP -->
+                <div class="card source-card">
+                    <div class="source-logo-container">
+                        <img src="https://www.google.com/s2/favicons?domain=haveibeenpwned.com&sz=128" alt="Logo HIBP" class="source-logo">
+                    </div>
+                    <h3>Have I Been Pwned</h3>
+                    <p class="source-desc" id="lbl-src-hibp-desc">HIBP API v3</p>
+                    <p class="source-detail" id="lbl-src-hibp-detail">Serviço global que agrega dados de vazamentos de dados (Data Breaches) confirmados.</p>
+                    <div class="source-tags">
+                        <span class="tag" id="lbl-src-hibp-tag1">Vazamentos</span>
+                        <span class="tag" id="lbl-src-hibp-tag2">Contas Comprometidas</span>
+                    </div>
+                    <a href="https://haveibeenpwned.com/" target="_blank" class="btn-source lbl-btn-visit">Visitar Fonte</a>
+                </div>
+
+                <!-- CARD 3: OTX -->
+                <div class="card source-card">
+                    <div class="source-logo-container">
+                        <img src="https://www.google.com/s2/favicons?domain=otx.alienvault.com&sz=128" alt="Logo AlienVault" class="source-logo">
+                    </div>
+                    <h3>AlienVault OTX</h3>
+                    <p class="source-desc" id="lbl-src-otx-desc">Open Threat Exchange</p>
+                    <p class="source-detail" id="lbl-src-otx-detail">A maior comunidade de inteligência de ameaças colaborativa do mundo, fornecendo IoCs em tempo real.</p>
+                    <div class="source-tags">
+                        <span class="tag" id="lbl-src-otx-tag1">Setores Alvo</span>
+                        <span class="tag" id="lbl-src-otx-tag2">Ameaças Ativas</span>
+                    </div>
+                    <a href="https://otx.alienvault.com/" target="_blank" class="btn-source lbl-btn-visit">Visitar Fonte</a>
+                </div>
+
+                <!-- CARD 4: AbuseIPDB -->
+                <div class="card source-card">
+                    <div class="source-logo-container">
+                        <img src="https://www.google.com/s2/favicons?domain=abuseipdb.com&sz=128" alt="Logo AbuseIPDB" class="source-logo">
+                    </div>
+                    <h3>AbuseIPDB</h3>
+                    <p class="source-desc" id="lbl-src-abuse-desc">IP Reputation Database</p>
+                    <p class="source-detail" id="lbl-src-abuse-detail">Projeto dedicado a rastrear e denunciar endereços IP envolvidos em atividades maliciosas.</p>
+                    <div class="source-tags">
+                        <span class="tag" id="lbl-src-abuse-tag1">Geolocalização</span>
+                        <span class="tag" id="lbl-src-abuse-tag2">Reputação de IP</span>
+                    </div>
+                    <a href="https://www.abuseipdb.com/" target="_blank" class="btn-source lbl-btn-visit">Visitar Fonte</a>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    <!-- Importar config ANTES do script -->
+    <script src="config.js"></script>
+    <script src="script.js" defer></script>
+</body>
+</html>

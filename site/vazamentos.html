@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Vazamentos | Project Aegis</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🛡️ Aegis</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" id="lbl-sidebar-dashboard">Dashboard Principal</a>
+                <a href="analise_cves.html" id="lbl-sidebar-analysis">Análise de CVEs</a>
+                <a href="vazamentos.html" class="active" id="lbl-sidebar-leaks">Vazamentos</a>
+                <a href="relatorios.html" id="lbl-sidebar-reports">Relatórios</a>
+                <a href="fontes.html" id="lbl-sidebar-settings">Fonte dos Dados</a>
+                <a href="https://github.com/vrsmarcos26/PI1-Project-Aegis" target="_blank" id="lbl-sidebar-collaborators">Colaboradores</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Project Aegis © 2025</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h2 id="lbl-leaks-title">Verificador de Segurança</h2>
+                <div class="header-controls">
+                    <button id="theme-toggle" class="theme-toggle-button">Alternar Tema</button>
+                    
+                    <!-- Botões de Idioma -->
+                    <div class="lang-controls">
+                        <button class="lang-btn active" onclick="mudarIdiomaPagina('pt_br')">PT</button>
+                        <button class="lang-btn" onclick="mudarIdiomaPagina('en_us')">EN</button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="check-container">
+                <div class="check-box">
+                    <span class="check-icon">🕵️‍♂️</span>
+                    <h2 id="lbl-box-title">Você usa algum destes serviços?</h2>
+                    <p id="lbl-box-desc" style="color: var(--cor-texto-secundario); margin-top: 10px;">
+                        Digite o nome de um site ou aplicativo (ex: "Adobe", "LinkedIn", "Canva") para ver se ele consta na nossa base de dados de vazamentos confirmados.
+                    </p>
+
+                    <div class="check-input-group">
+                        <input type="text" id="serviceInput" class="check-input" placeholder="Digite o nome do serviço...">
+                        <button onclick="verificarVazamento()" id="lbl-btn-check" class="check-btn">Verificar</button>
+                    </div>
+
+                    <div id="resultArea" class="result-area">
+                        <h3 id="resultTitle" style="margin-bottom: 10px;"></h3>
+                        <p id="resultDesc"></p>
+                    </div>
+                </div>
+                
+                <p id="lbl-disclaimer" style="margin-top: 30px; font-size: 0.9em; color: var(--cor-texto-secundario);">
+                    * Esta ferramenta verifica apenas vazamentos públicos catalogados na nossa base de dados (HIBP).
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Importando o dicionário de tradução -->
+    <script src="config.js"></script>
+
+    <script>
+        // --- Scripts da Página ---
+
+        let idiomaAtual = localStorage.getItem('lang') || 'pt_br';
+        let bancoDeVazamentos = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarBanco();
+            iniciarTemaEIdiomaPagina();
+
+            // Listener de tema
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                const newTheme = document.body.classList.contains('dark-theme') ? 'light' : 'dark';
+                document.body.classList.toggle('dark-theme');
+                localStorage.setItem('theme', newTheme);
+                atualizarBotaoTemaPagina(newTheme);
+            });
+        });
+
+        async function carregarBanco() {
+            try {
+                const response = await fetch('hibp_kpis.json');
+                if(!response.ok) throw new Error("Erro ao carregar base");
+                const data = await response.json();
+                bancoDeVazamentos = Array.isArray(data) ? data : (data.vazamentos_recentes_tabela || []);
+            } catch (e) {
+                console.error("Erro:", e);
+                // Fallback (mantido para testes)
+                bancoDeVazamentos = [
+                    { nome_vazamento: "Adobe", data_vazamento: "2013-10-04", contas_afetadas: 153000000 },
+                    { nome_vazamento: "LinkedIn", data_vazamento: "2016-05-18", contas_afetadas: 164000000 }
+                ];
+            }
+        }
+        
+        // Funções específicas da página para não depender de script.js que contém a lógica de dashboard
+        function iniciarTemaEIdiomaPagina() {
+             mudarIdiomaPagina(idiomaAtual);
+             const savedTheme = localStorage.getItem('theme') || 'light';
+             document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+             atualizarBotaoTemaPagina(savedTheme);
+        }
+
+        function atualizarBotaoTemaPagina(tema) {
+            const btn = document.getElementById('theme-toggle');
+            if(btn && typeof langConfig !== 'undefined') {
+                btn.innerText = langConfig[idiomaAtual].header.themeBtn[tema];
+            }
+        }
+
+        function mudarIdiomaPagina(lang) {
+            idiomaAtual = lang;
+            localStorage.setItem('lang', lang);
+            
+            if (typeof langConfig === 'undefined') return;
+            const t = langConfig[lang];
+            const ts = t.sidebar;
+            const tl = t.leaksPage;
+            
+            // Sidebar
+            setText('lbl-sidebar-dashboard', ts.dashboard);
+            setText('lbl-sidebar-analysis', ts.analysis);
+            setText('lbl-sidebar-leaks', ts.leaks);
+            setText('lbl-sidebar-reports', ts.reports);
+            setText('lbl-sidebar-settings', ts.settings);
+            setText('lbl-sidebar-collaborators', ts.collaborators);
+            
+            // Página
+            setText('lbl-leaks-title', tl.title);
+            setText('lbl-box-title', tl.boxTitle);
+            setText('lbl-box-desc', tl.boxDesc);
+            document.getElementById('serviceInput').placeholder = tl.placeholder;
+            setText('lbl-btn-check', tl.btnCheck);
+            setText('lbl-disclaimer', tl.disclaimer);
+            
+            const temaAtual = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+            atualizarBotaoTemaPagina(temaAtual);
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText.toLowerCase() === lang.split('_')[0]) btn.classList.add('active');
+            });
+        }
+
+        function setText(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = text;
+        }
+
+        function verificarVazamento() {
+            const input = document.getElementById('serviceInput');
+            const termo = input.value.trim().toLowerCase();
+            const resultArea = document.getElementById('resultArea');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultDesc = document.getElementById('resultDesc');
+            
+            if (typeof langConfig === 'undefined') {
+                 console.error("langConfig não definida!");
+                 return;
+            }
+            const t = langConfig[idiomaAtual].leaksPage;
+
+            if (termo.length < 2) {
+                 // Substituído alert() por console.error e aviso de UI em um projeto real.
+                resultArea.className = 'result-area result-danger';
+                resultTitle.innerText = `Erro`;
+                resultDesc.innerText = t.errors.minChars;
+                resultArea.style.display = 'block';
+                return;
+            }
+
+            const encontrado = bancoDeVazamentos.find(v => 
+                (v.nome_vazamento || "").toLowerCase().includes(termo)
+            );
+
+            resultArea.style.display = 'block';
+            resultArea.className = 'result-area'; 
+
+            if (encontrado) {
+                resultArea.classList.add('result-danger');
+                resultTitle.innerText = `${t.results.dangerTitle} "${encontrado.nome_vazamento}"`;
+                
+                // Locale para formatar data e número
+                const locale = idiomaAtual.replace('_', '-');
+                const data = encontrado.data_vazamento ? new Date(encontrado.data_vazamento).toLocaleDateString(locale) : 'N/A';
+                const contas = encontrado.contas_afetadas ? encontrado.contas_afetadas.toLocaleString(locale) : 'N/A';
+
+                resultDesc.innerHTML = `
+                    ${t.results.dangerDescPart1} <strong>${data}</strong>.<br>
+                    ${t.results.dangerDescPart2} <strong>${contas}</strong> ${t.results.dangerDescPart3}<br><br>
+                    <strong>${t.results.recTitle}</strong> ${t.results.recDesc}
+                `;
+            } else {
+                resultArea.classList.add('result-safe');
+                resultTitle.innerText = `${t.results.safeTitle} "${input.value}"`;
+                resultDesc.innerText = t.results.safeDesc;
+            }
+        }
+
+        document.getElementById('serviceInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') verificarVazamento();
+        });
+    </script>
+    <script src="script.js" defer></script>
+</body>
+</html>

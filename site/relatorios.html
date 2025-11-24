@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios | Project Aegis</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body id="body-relatorios"> <!-- Adicionado ID para a lógica de tema/idioma no script.js -->
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🛡️ Aegis</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" id="lbl-sidebar-dashboard">Dashboard Principal</a>
+                <a href="analise_cves.html" id="lbl-sidebar-analysis">Análise de CVEs</a>
+                <a href="vazamentos.html" id="lbl-sidebar-leaks">Vazamentos</a>
+                <a href="relatorios.html" class="active" id="lbl-sidebar-reports">Relatórios</a>
+                <a href="fontes.html" id="lbl-sidebar-settings">Fonte dos Dados</a>
+                <a href="https://github.com/vrsmarcos26/PI1-Project-Aegis" target="_blank" id="lbl-sidebar-collaborators">Colaboradores</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Project Aegis © 2025</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h2 id="lbl-reports-title">Central de Relatórios</h2>
+                <div class="header-controls">
+                    <select id="filter-reports" onchange="filtrarTabelaRelatorios(this.value)">
+                        <option value="all">Todas as Fontes</option>
+                        <option value="otx">AlienVault OTX</option>
+                        <option value="hibp">Vazamentos (HIBP)</option>
+                        <option value="nvd">Vulnerabilidades (NVD)</option>
+                    </select>
+                    <button id="theme-toggle" class="theme-toggle-button">Alternar Tema</button>
+                    
+                    <div class="lang-controls">
+                        <button class="lang-btn active" onclick="mudarIdioma('pt_br')">PT</button>
+                        <button class="lang-btn" onclick="mudarIdioma('en_us')">EN</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- AVISO DE AMOSTRAGEM -->
+            <div class="data-notice">
+                <span class="notice-icon">ℹ️</span>
+                <div id="lbl-data-notice">
+                    <strong>Nota sobre os Dados:</strong> As informações exibidas neste dashboard são uma <em>amostra representativa</em> coletada em tempo real das fontes abaixo. Devido a limites de API e performance, não exibimos a totalidade histórica de todos os registros mundiais, mas sim um recorte focado nas ameaças mais recentes e relevantes para o período selecionado.
+                </div>
+            </div>
+
+            <div class="reports-container">
+                
+                <!-- COLUNA DA ESQUERDA: FEEDS DE DADOS -->
+                <div class="feeds-column">
+                    
+                    <!-- FEED 1: OTX -->
+                    <div id="feed-otx" class="card feed-section">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h3 id="lbl-otx-title">Feed de Inteligência (AlienVault OTX)</h3>
+                            <img src="https://www.google.com/s2/favicons?domain=otx.alienvault.com&sz=32" alt="OTX">
+                        </div>
+                        <p id="lbl-otx-desc" style="font-size: 0.9em; color: var(--cor-texto-secundario); margin-bottom: 20px;">
+                            Últimos pulsos e campanhas de ameaça detectados globalmente.
+                        </p>
+                        <table id="tabela-otx-reports">
+                            <thead>
+                                <tr>
+                                    <th id="th-otx-date">Data</th>
+                                    <th id="th-otx-threats">Ameaças (Tags)</th>
+                                    <th id="th-otx-countries">Países Alvo</th>
+                                </tr>
+                            </thead>
+                            <tbody><tr><td colspan="3" id="loading-otx">Carregando...</td></tr></tbody>
+                        </table>
+                    </div>
+
+                    <!-- FEED 2: HIBP -->
+                    <div id="feed-hibp" class="card feed-section">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h3 id="lbl-hibp-title">Registro de Vazamentos (HIBP)</h3>
+                            <img src="https://www.google.com/s2/favicons?domain=haveibeenpwned.com&sz=32" alt="HIBP">
+                        </div>
+                        <table id="tabela-hibp-reports">
+                            <thead>
+                                <tr>
+                                    <th id="th-hibp-date">Data</th>
+                                    <th id="th-hibp-service">Empresa/Serviço</th>
+                                    <th id="th-hibp-impact">Impacto (Contas)</th>
+                                </tr>
+                            </thead>
+                            <tbody><tr><td colspan="3" id="loading-hibp">Carregando...</td></tr></tbody>
+                        </table>
+                    </div>
+
+                    <!-- FEED 3: NVD -->
+                    <div id="feed-nvd" class="card feed-section">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h3 id="lbl-nvd-title">Últimas CVEs Críticas (NVD)</h3>
+                            <img src="https://www.google.com/s2/favicons?domain=nvd.nist.gov&sz=32" alt="NVD">
+                        </div>
+                        <table id="tabela-nvd-reports">
+                            <thead>
+                                <tr>
+                                    <th id="th-nvd-id">ID CVE</th>
+                                    <th id="th-nvd-date">Data</th>
+                                    <th id="th-nvd-type">Tipo de Falha</th>
+                                </tr>
+                            </thead>
+                            <tbody><tr><td colspan="3" id="loading-nvd">Carregando...</td></tr></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- COLUNA DA DIREITA: DOCUMENTAÇÃO -->
+                <div class="docs-column">
+                    <div class="card" style="height: fit-content; position: sticky; top: 20px;">
+                        <h3 id="lbl-docs-title">Documentação do Projeto</h3>
+                        <p id="lbl-docs-desc" style="font-size: 0.9em; color: var(--cor-texto-secundario); margin-bottom: 20px;">
+                            Acesse os arquivos oficiais e entregáveis do PI 1 diretamente no nosso repositório.
+                        </p>
+
+                        <!-- Link 1: Visão do Produto -->
+                        <a href="https://github.com/vrsmarcos26/PI1-Project-Aegis/blob/main/docs/Visao_Produto.pdf" class="doc-link" target="_blank">
+                            <span class="doc-icon">📄</span>
+                            <div>
+                                <strong id="lbl-doc-vision-title">Visão do Produto</strong><br>
+                                <span style="font-size: 0.8em;" id="lbl-doc-vision-sub">Escopo e Personas</span>
+                            </div>
+                        </a>
+
+                        <!-- Link 2: Plano de Projeto -->
+                        <a href="https://github.com/vrsmarcos26/PI1-Project-Aegis/blob/main/docs/Plano_Projeto.pdf" class="doc-link" target="_blank">
+                            <span class="doc-icon">📊</span>
+                            <div>
+                                <strong id="lbl-doc-plan-title">Plano de Projeto</strong><br>
+                                <span style="font-size: 0.8em;" id="lbl-doc-plan-sub">Cronograma e Riscos</span>
+                            </div>
+                        </a>
+                        
+                        <!-- Link 3: Arquitetura -->
+                        <a href="https://github.com/vrsmarcos26/PI1-Project-Aegis/blob/main/docs/Arquitetura_ETL.pdf" class="doc-link" target="_blank">
+                            <span class="doc-icon">⚙️</span>
+                            <div>
+                                <strong id="lbl-doc-arch-title">Arquitetura de Dados</strong><br>
+                                <span style="font-size: 0.8em;" id="lbl-doc-arch-sub">Diagrama de Fluxo</span>
+                            </div>
+                        </a>
+                        
+                        <!-- Link 4: Pasta Docs (Novo) -->
+                        <a href="https://github.com/vrsmarcos26/PI1-Project-Aegis/tree/main/docs" class="doc-link" target="_blank" style="border-color: #333; background-color: #24292e; color: #fff; margin-top: 20px;">
+                            <span class="doc-icon">📂</span>
+                            <div>
+                                <strong id="lbl-doc-repo-title">Ver Pasta Completa</strong><br>
+                                <span style="font-size: 0.8em;" id="lbl-doc-repo-sub">Acessar GitHub /docs</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    
+    <!-- Importando o config ANTES do script principal -->
+    <script src="config.js"></script>
+
+    <!-- SCRIPT PARA CARREGAR AS TABELAS -->
+    <script>
+        // Função de inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            // A função iniciarTemaEIdioma do script.js é chamada automaticamente no DOMContentLoaded
+            // Mas as funções de carregamento da tabela de relatórios são específicas desta página.
+            carregarTabelaOTX();
+            carregarTabelaHIBP();
+            carregarTabelaNVD();
+        });
+
+        // A função mudarIdioma() é global e está definida em script.js
+
+        function filtrarTabelaRelatorios(valor) {
+            const otx = document.getElementById('feed-otx');
+            const hibp = document.getElementById('feed-hibp');
+            const nvd = document.getElementById('feed-nvd');
+            
+            if(otx) otx.style.display = "none";
+            if(hibp) hibp.style.display = "none";
+            if(nvd) nvd.style.display = "none";
+
+            if (valor === 'all') {
+                if(otx) otx.style.display = "block";
+                if(hibp) hibp.style.display = "block";
+                if(nvd) nvd.style.display = "block";
+            } else if (valor === 'otx' && otx) {
+                otx.style.display = "block";
+            } else if (valor === 'hibp' && hibp) {
+                hibp.style.display = "block";
+            } else if (valor === 'nvd' && nvd) {
+                nvd.style.display = "block";
+            }
+        }
+        
+        async function carregarTabelaOTX() {
+            try {
+                const response = await fetch(`otx_kpis.json?v=${new Date().getTime()}`);
+                const data = await response.json();
+                const tbody = document.querySelector("#tabela-otx-reports tbody");
+                tbody.innerHTML = "";
+                
+                // Pega os 10 mais recentes
+                const recentes = data.slice(0, 10); 
+
+                recentes.forEach(item => {
+                    const tr = document.createElement('tr');
+                    
+                    let tagsHtml = item.ameacas.slice(0, 3).map(tag => 
+                        `<span class="tag-threat">${tag}</span>`
+                    ).join("");
+                    if(item.ameacas.length > 3) tagsHtml += `<span style="font-size:0.8em"> +${item.ameacas.length - 3}</span>`;
+                    
+                    let paisesTexto = item.paises.length > 0 ? item.paises.join(", ") : "Global / N/A";
+                    if(paisesTexto.length > 25) paisesTexto = paisesTexto.substring(0, 25) + "...";
+
+                    tr.innerHTML = `
+                        <td style="white-space: nowrap;">${item.data_criacao}</td>
+                        <td>${tagsHtml || "N/A"}</td>
+                        <td>${paisesTexto}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (e) { 
+                console.error(e); 
+                document.querySelector("#tabela-otx-reports tbody").innerHTML = "<tr><td colspan='3'>Sem dados.</td></tr>";
+            }
+        }
+
+        async function carregarTabelaHIBP() {
+            try {
+                const response = await fetch(`hibp_kpis.json?v=${new Date().getTime()}`);
+                const data = await response.json();
+                const tbody = document.querySelector("#tabela-hibp-reports tbody");
+                tbody.innerHTML = "";
+                
+                let lista = Array.isArray(data) ? data : (data.vazamentos_recentes_tabela || []);
+                // Ordenar por data mais recente
+                lista.sort((a, b) => new Date(b.data_vazamento) - new Date(a.data_vazamento));
+                const recentes = lista.slice(0, 10);
+
+                recentes.forEach(item => {
+                    const tr = document.createElement('tr');
+                    const contas = typeof item.contas_afetadas === 'number' ? item.contas_afetadas.toLocaleString('pt-BR') : item.contas_afetadas;
+                    tr.innerHTML = `
+                        <td style="white-space: nowrap;">${item.data_vazamento}</td>
+                        <td><strong>${item.nome_vazamento}</strong></td>
+                        <td>${contas}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        async function carregarTabelaNVD() {
+            try {
+                const response = await fetch(`cve_kpis.json?v=${new Date().getTime()}`);
+                const data = await response.json();
+                const tbody = document.querySelector("#tabela-nvd-reports tbody");
+                tbody.innerHTML = "";
+                
+                // Filtrar apenas CRÍTICAS e ordenar por data
+                const criticas = data.filter(x => x.severidade === 'CRITICAL');
+                criticas.sort((a, b) => new Date(b.data_publicacao) - new Date(a.data_publicacao));
+                const recentes = criticas.slice(0, 10);
+
+                recentes.forEach(item => {
+                    const tr = document.createElement('tr');
+                    const tipo = item.tipo_falha || 'Outros';
+                    tr.innerHTML = `
+                        <td><span class="tag-cve">${item.cve_id}</span></td>
+                        <td style="white-space: nowrap;">${item.data_publicacao}</td>
+                        <td>${tipo}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (e) { console.error(e); }
+        }
+    </script>
+    <script src="script.js" defer></script>
+</body>
+</html>
