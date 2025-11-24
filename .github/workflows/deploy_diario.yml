@@ -1,9 +1,6 @@
 name: Coleta de Dados e Deploy Automático
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     # Cron em UTC. 09:00 UTC = 06:00 Brasil | 21:00 UTC = 18:00 Brasil
     - cron: '0 9,21 * * *'
