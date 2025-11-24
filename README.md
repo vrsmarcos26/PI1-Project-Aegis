@@ -51,11 +51,11 @@ O protótipo inicial foi construído utilizando tecnologias web fundamentais, se
 
 | Membro                | Papel                                      |
 | --------------------- | ------------------------------------------ |
-| 👑 **[Marcos Vinícius](https://github.com/vrsmarcos26)** | **Líder de Equipe / Desenvolvedor** |
-| 🧪 **[João Marcelo](https://github.com/joaomarcelo11)** | **Tester / Documentação** |
-| 🗃️ **[Davi Maia](https://github.com/davu123)** | **Desenvolvedor (Foco em Banco de Dados)** |
-| 💻 **[Eduardo](https://github.com/edu-uchoa)** | **Desenvolvedor Full-Stack** |
-| 💻 **[Felipe Barcelos](https://github.com/felpsdc)** | **Desenvolvedor Full-Stack** |
+| 👑 **[Marcos Vinícius](https://github.com/vrsmarcos26)** | **Líder de Projeto / Arquiteto de Dados / Desenvolvedor Full-Stack** |
+| 🧪 **[João Marcelo](https://github.com/joaomarcelo11)** | **Tester de QA / Documentação Técnica (Principal)** |
+| 🗃️ **[Davi Maia](https://github.com/davu123)** | **Tester de QA / Documentação Técnica (Secundário)** |
+| 💻 **[Eduardo](https://github.com/edu-uchoa)** | **Desenvolvedor Back-end** |
+| 💻 **[Felipe Barcelos](https://github.com/felpsdc)** | **Desenvolvedor de IA (Inteligência Artificial)** |
 
 ## 📂 4. Estrutura do Repositório
 
