@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title-colab">Colaboradores | Project Aegis</title>
+    
+    <!-- Favicon de escudo para o navegador -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🛡️ Aegis</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" id="lbl-sidebar-dashboard">Dashboard Principal</a>
+                <a href="analise_cves.html" id="lbl-sidebar-analysis">Análise de CVEs</a>
+                <a href="vazamentos.html" id="lbl-sidebar-leaks">Vazamentos</a>
+                <a href="relatorios.html" id="lbl-sidebar-reports">Relatórios</a>
+                <a href="fontes.html" id="lbl-sidebar-settings">Fonte dos Dados</a>
+                <a href="colaboradores.html" class="active" id="lbl-sidebar-collaborators">Colaboradores</a>
+                <a href="https://github.com/vrsmarcos26/PI1-Project-Aegis">GitHub</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Project Aegis © 2025</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h2 id="lbl-colab-title">Nosso Time</h2>
+                <div class="header-controls">
+                    <button id="theme-toggle" class="theme-toggle-button">
+                        Alternar Tema
+                    </button>
+                    <div class="lang-controls">
+                        <button class="lang-btn active" onclick="mudarIdiomaPagina('pt_br')">PT</button>
+                        <button class="lang-btn" onclick="mudarIdiomaPagina('en_us')">EN</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Reutilizando a classe sources-grid para o layout de cards -->
+            <div class="sources-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                
+                <!-- CARD 1: Marcos Vinícius (Líder / Full-Stack) -->
+                <div class="card source-card">
+                    <div class="source-logo-container" style="background-color: var(--cor-perigo);">
+                        <span style="font-size: 2.5em;">👑</span>
+                    </div>
+                    <h3 id="colab1-name">Marcos Vinícius</h3>
+                    <p class="source-desc" id="colab1-role"></p>
+                    <p class="source-detail" id="colab1-desc"></p>
+                    <div class="source-tags">
+                        <span class="tag">Full-Stack</span>
+                        <span class="tag">Arquitetura</span>
+                    </div>
+                    <a id="colab1-link" href="#" target="_blank" class="btn-source lbl-colab-btn">Ver GitHub</a>
+                </div>
+
+                <!-- CARD 2: João Marcelo (QA / Docs Principal) -->
+                <div class="card source-card">
+                    <div class="source-logo-container" style="background-color: var(--cor-aviso);">
+                         <span style="font-size: 2.5em;">🧪</span>
+                    </div>
+                    <h3 id="colab2-name">João Marcelo</h3>
+                    <p class="source-desc" id="colab2-role"></p>
+                    <p class="source-detail" id="colab2-desc"></p>
+                    <div class="source-tags">
+                        <span class="tag">QA</span>
+                        <span class="tag">Documentação</span>
+                    </div>
+                    <a id="colab2-link" href="#" target="_blank" class="btn-source lbl-colab-btn">Ver GitHub</a>
+                </div>
+
+                <!-- CARD 3: Davi Maia (QA / Docs Secundário) -->
+                <div class="card source-card">
+                    <div class="source-logo-container" style="background-color: var(--cor-neutra);">
+                         <span style="font-size: 2.5em;">🗃️</span>
+                    </div>
+                    <h3 id="colab3-name">Davi Maia</h3>
+                    <p class="source-desc" id="colab3-role"></p>
+                    <p class="source-detail" id="colab3-desc"></p>
+                    <div class="source-tags">
+                        <span class="tag">Testes</span>
+                        <span class="tag">Suporte</span>
+                    </div>
+                    <a id="colab3-link" href="#" target="_blank" class="btn-source lbl-colab-btn">Ver GitHub</a>
+                </div>
+                
+                <!-- CARD 4: Eduardo Uchoa (Dev IA) -->
+                <div class="card source-card">
+                    <div class="source-logo-container" style="background-color: var(--cor-primaria);">
+                         <span style="font-size: 2.5em;">🤖</span>
+                    </div>
+                    <h3 id="colab4-name">Eduardo Uchoa</h3>
+                    <p class="source-desc" id="colab4-role"></p>
+                    <p class="source-detail" id="colab4-desc"></p>
+                    <div class="source-tags">
+                        <span class="tag">Inteligência Artificial</span>
+                        <span class="tag">Python</span>
+                    </div>
+                    <a id="colab4-link" href="#" target="_blank" class="btn-source lbl-colab-btn">Ver GitHub</a>
+                </div>
+
+                <!-- CARD 5: Felipe Barcelos (Dev Back-end) -->
+                <div class="card source-card">
+                    <div class="source-logo-container" style="background-color: var(--cor-secundaria);">
+                         <span style="font-size: 2.5em;">⚙️</span>
+                    </div>
+                    <h3 id="colab5-name">Felipe Barcelos</h3>
+                    <p class="source-desc" id="colab5-role"></p>
+                    <p class="source-detail" id="colab5-desc"></p>
+                    <div class="source-tags">
+                        <span class="tag">Back-end</span>
+                        <span class="tag">APIs</span>
+                    </div>
+                    <a id="colab5-link" href="#" target="_blank" class="btn-source lbl-colab-btn">Ver GitHub</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Importando o config ANTES do script -->
+    <script src="config.js"></script>
+
+    <script>
+        let idiomaAtual = localStorage.getItem('lang') || 'pt_br';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            iniciarTemaEIdiomaPagina();
+            
+            // Listener de tema
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                const newTheme = document.body.classList.contains('dark-theme') ? 'light' : 'dark';
+                document.body.classList.toggle('dark-theme');
+                localStorage.setItem('theme', newTheme);
+                atualizarBotaoTemaPagina(newTheme);
+            });
+        });
+        
+        // Funções de suporte para tema/idioma (repetidas aqui para independência)
+        function iniciarTemaEIdiomaPagina() {
+             mudarIdiomaPagina(idiomaAtual);
+             const savedTheme = localStorage.getItem('theme') || 'light';
+             document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+             atualizarBotaoTemaPagina(savedTheme);
+        }
+
+        function atualizarBotaoTemaPagina(tema) {
+            const btn = document.getElementById('theme-toggle');
+            if(btn && typeof langConfig !== 'undefined') {
+                btn.innerText = langConfig[idiomaAtual].header.themeBtn[tema];
+            }
+        }
+
+        function setText(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = text;
+        }
+
+        function mudarIdiomaPagina(lang) {
+            idiomaAtual = lang;
+            localStorage.setItem('lang', lang);
+            
+            if (typeof langConfig === 'undefined') return;
+            const t = langConfig[lang];
+            const ts = t.sidebar;
+            const tc = t.collaboratorsPage; 
+
+            // Sidebar (Comum)
+            setText('lbl-sidebar-dashboard', ts.dashboard);
+            setText('lbl-sidebar-analysis', ts.analysis);
+            setText('lbl-sidebar-leaks', ts.leaks);
+            setText('lbl-sidebar-reports', ts.reports);
+            setText('lbl-sidebar-settings', ts.settings);
+            setText('lbl-sidebar-collaborators', ts.collaborators);
+            
+            // Títulos da Página
+            document.getElementById('title-colab').innerText = tc.pageTitle;
+            setText('lbl-colab-title', tc.title);
+            document.querySelectorAll('.lbl-colab-btn').forEach(btn => btn.innerText = tc.btnGitHub);
+            
+            // Colaboradores (1 a 5)
+            for (let i = 1; i <= 5; i++) {
+                const colab = tc[`colab${i}`];
+                
+                // Nomes (sem tradução, mas definidos para garantir)
+                const nameEl = document.getElementById(`colab${i}-name`);
+                if(nameEl) nameEl.innerText = colab.name;
+
+                // Papel e Descrição (traduzidos)
+                setText(`colab${i}-role`, colab.role);
+                setText(`colab${i}-desc`, colab.desc);
+
+                // Link do GitHub
+                const linkEl = document.getElementById(`colab${i}-link`);
+                if(linkEl) linkEl.href = colab.link;
+            }
+
+            // Atualiza botões visuais
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText.toLowerCase() === lang.split('_')[0]) btn.classList.add('active');
+            });
+            
+            // Atualiza botão de tema
+            const temaAtual = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+            atualizarBotaoTemaPagina(temaAtual);
+        }
+    </script>
+    <script src="script.js" defer></script> 
+</body>
+</html>

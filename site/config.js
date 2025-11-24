@@ -25,7 +25,7 @@ const langConfig = {
             trend: "Tendência de Vulnerabilidades Críticas",
             severity: "Distribuição de Severidade",
             sectors: "Setores Mais Atacados (OTX)",
-            countries: "Top 5 Países (Origem de IoCs)",
+            countries: "Top 5 Países (AbuseIPDB)",
             types: "Principais Tipos de Vulnerabilidade"
         },
         table: {
@@ -115,6 +115,42 @@ const langConfig = {
                 detail: "Projeto dedicado a rastrear e denunciar endereços IP envolvidos em atividades maliciosas.",
                 tags: ["Geolocalização", "Reputação de IP"]
             }
+        },
+
+        collaboratorsPage: {
+            pageTitle: "Colaboradores | Project Aegis",
+            title: "Nosso Time",
+            btnGitHub: "Ver GitHub",
+            colab1: {
+                name: "Marcos Vinícius",
+                link: "https://github.com/vrsmarcos26",
+                role: "Líder de Projeto / Arquiteto de Dados / Desenvolvedor Full-Stack",
+                desc: "Responsável pela arquitetura completa do dashboard, coleta de dados (ETL) e gestão técnica do escopo."
+            },
+            colab2: {
+                name: "João Marcelo",
+                link: "https://github.com/joaomarcelo11",
+                role: "Tester de QA / Documentação Técnica (Principal)",
+                desc: "Focado na garantia de qualidade (QA) do produto e na criação e manutenção da documentação técnica principal."
+            },
+            colab3: {
+                name: "Davi Maia",
+                link: "https://github.com/davu123",
+                role: "Tester de QA / Documentação Técnica (Secundário)",
+                desc: "Contribui com testes rigorosos, validação de funcionalidades e suporte na elaboração da documentação secundária."
+            },
+            colab4: {
+                name: "Felipe Barcelos",
+                link: "https://github.com/felpsdc",
+                role: "Desenvolvedor de IA (Inteligência Artificial)",
+                desc: "Especializado na integração de modelos de IA para análise preditiva de ameaças e otimização de dados."
+            },
+            colab5: {
+                name: "Eduardo Uchoa",
+                link: "https://github.com/edu-uchoa",
+                role: "Desenvolvedor Back-end",
+                desc: "Responsável por toda a infraestrutura de servidor, rotas de API e otimização de performance do lado do servidor."
+            }
         }
     },
 
@@ -144,7 +180,7 @@ const langConfig = {
             trend: "Critical Vulnerabilities Trend",
             severity: "Severity Distribution",
             sectors: "Most Attacked Sectors (OTX)",
-            countries: "Top 5 Countries (IoC Origin)",
+            countries: "Top 5 Countries (AbuseIPDB)",
             types: "Top Vulnerability Types"
         },
         table: {
@@ -233,6 +269,42 @@ const langConfig = {
                 desc: "IP Reputation Database",
                 detail: "Project dedicated to tracking and reporting IP addresses involved in malicious activity.",
                 tags: ["Geolocation", "IP Reputation"]
+            }
+        },
+        
+        collaboratorsPage: {
+            pageTitle: "Collaborators | Project Aegis",
+            title: "Our Team",
+            btnGitHub: "View GitHub",
+            colab1: {
+                name: "Marcos Vinícius",
+                link: "https://github.com/vrsmarcos26",
+                role: "Project Leader / Data Architect / Full-Stack Developer",
+                desc: "Responsible for the complete dashboard architecture, data collection (ETL), and technical scope management."
+            },
+            colab2: {
+                name: "João Marcelo",
+                link: "https://github.com/joaomarcelo11",
+                role: "QA Tester / Technical Documentation (Primary)",
+                desc: "Focused on product quality assurance (QA) and the creation and maintenance of primary technical documentation."
+            },
+            colab3: {
+                name: "Davi Maia",
+                link: "https://github.com/davu123",
+                role: "QA Tester / Technical Documentation (Secondary)",
+                desc: "Contributes with rigorous testing, feature validation, and support in secondary documentation."
+            },
+            colab4: {
+                name: "Eduardo Uchoa",
+                link: "https://github.com/edu-uchoa",
+                role: "AI Developer (Artificial Intelligence)",
+                desc: "Specializes in integrating AI models for predictive threat analysis and data optimization."
+            },
+            colab5: {
+                name: "Felipe Barcelos",
+                link: "https://github.com/felpsdc",
+                role: "Back-end Developer",
+                desc: "Responsible for all server infrastructure, API routes, and server-side performance optimization."
             }
         }
     }

@@ -470,8 +470,8 @@ function filtrarEAtualizarDashboard(periodo) {
         // KPI Total Contas
         const totalContas = filtrados.reduce((acc, curr) => acc + (curr.contas_afetadas || 0), 0);
         let formatado = totalContas.toLocaleString('pt-BR');
-        if (totalContas > 1000000) formatado = (totalContas/1000000).toFixed(1) + " Milhões";
-        else if (totalContas > 1000) formatado = (totalContas/1000).toFixed(1) + " Mil";
+        if (totalContas > 1000000) formatado = (totalContas/1000000).toFixed(1) + " M";
+        else if (totalContas > 1000) formatado = (totalContas/1000).toFixed(1) + " k";
         
         const kpiContasEl = document.getElementById('kpi-contas-vazadas');
         if(kpiContasEl) kpiContasEl.innerText = formatado;
