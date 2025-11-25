@@ -295,14 +295,14 @@ const langConfig = {
                 desc: "Contributes with rigorous testing, feature validation, and support in secondary documentation."
             },
             colab4: {
-                name: "Eduardo Uchoa",
-                link: "https://github.com/edu-uchoa",
+                name: "Felipe Barcelos",
+                link: "https://github.com/felpsdc",
                 role: "AI Developer (Artificial Intelligence)",
                 desc: "Specializes in integrating AI models for predictive threat analysis and data optimization."
             },
             colab5: {
-                name: "Felipe Barcelos",
-                link: "https://github.com/felpsdc",
+                name: "Eduardo Uchoa",
+                link: "https://github.com/edu-uchoa",
                 role: "Back-end Developer",
                 desc: "Responsible for all server infrastructure, API routes, and server-side performance optimization."
             }
