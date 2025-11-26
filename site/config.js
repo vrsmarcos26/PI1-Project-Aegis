@@ -151,6 +151,18 @@ const langConfig = {
                 role: "Desenvolvedor Back-end",
                 desc: "Responsável por toda a infraestrutura de servidor, rotas de API e otimização de performance do lado do servidor."
             }
+        },
+        mapPage: {
+            pageTitle: "Mapa de Ameaças | Project Aegis",
+            sidebar: "Mapa de Ameaças",
+            title: "Mapa Global de Ameaças (AbuseIPDB)",
+            notice: "Os pontos no mapa representam a concentração de IPs maliciosos detectados, com o tamanho do círculo indicando o volume de ocorrências. O mapa é renderizado em 2D usando D3.js e dados simulados de geolocalização.",
+            notice_loaded: "Mapa carregado com sucesso. Passe o mouse sobre os pontos para detalhes.",
+            notice_error: "Erro ao carregar o mapa. Verifique a conexão e o arquivo paises_kpis.json: ",
+            notice_recent: "AVISO: O mapa exibe apenas os 10.000 registros de IPs maliciosos mais recentes da base de dados, refletindo a atividade do dia de hoje e o histórico mais recente.",
+            tooltip: {
+                attacks: "Ataques Registrados"
+            }
         }
     },
 
@@ -305,6 +317,18 @@ const langConfig = {
                 link: "https://github.com/edu-uchoa",
                 role: "Back-end Developer",
                 desc: "Responsible for all server infrastructure, API routes, and server-side performance optimization."
+            }
+        },
+        mapPage: {
+            pageTitle: "Threat Map | Project Aegis",
+            sidebar: "Threat Map",
+            title: "Global Threat Map (AbuseIPDB)",
+            notice: "The points on the map represent the concentration of detected malicious IPs, with the circle size indicating the volume of occurrences. The map is rendered in 2D using D3.js and simulated geolocation data.",
+            notice_loaded: "Map successfully loaded. Hover over the points for details.",
+            notice_error: "Error loading map. Check connection and paises_kpis.json file: ",
+            notice_recent: "NOTICE: The map displays only the 10,000 most recent malicious IP records from the database, reflecting today's activity and the latest history.",
+            tooltip: {
+                attacks: "Registered Attacks"
             }
         }
     }

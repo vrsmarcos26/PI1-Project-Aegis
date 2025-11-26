@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title-mapa">Mapa de Ameaças | Project Aegis</title>
+    
+    <!-- Favicon de escudo para o navegador -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Bibliotecas de Mapa e Geometria -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+
+    <style>
+        /* Estilos específicos para o Mapa */
+        .map-container {
+            display: flex;
+            flex-direction: column;
+            /* Garante que o container use o espaço vertical disponível */
+            height: 80vh; 
+            padding: 20px;
+            background-color: var(--cor-fundo-card);
+            border-radius: 8px;
+            border: 1px solid var(--cor-borda);
+            box-shadow: 0 1px 3px var(--cor-sombra);
+        }
+
+        #world-map-svg {
+            flex-grow: 1;
+            width: 100%;
+            min-height: 400px;
+            /* Adiciona uma transição suave ao carregar */
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        /* Estilo base do mapa */
+        .country {
+            fill: var(--cor-fundo-principal); /* Cor de fundo dos países (claro/escuro) */
+            stroke: var(--cor-borda);
+            stroke-width: 0.5px;
+            transition: fill 0.3s, stroke 0.3s;
+        }
+
+        body.dark-theme .country {
+            fill: #1E232A; /* Um tom um pouco mais claro que o fundo do card para países */
+            stroke: var(--cor-borda);
+        }
+
+        .country:hover {
+            opacity: 0.9;
+        }
+
+        /* Pontos de calor (ataques) */
+        .attack-point {
+            fill: var(--cor-perigo); /* Vermelho/perigo para ataques */
+            opacity: 0.8;
+            transition: opacity 0.2s, r 0.3s;
+        }
+
+        .attack-point:hover {
+            opacity: 1;
+            stroke: #fff;
+            stroke-width: 1px;
+        }
+
+        /* Tooltip (Dica flutuante sobre o ponto) */
+        .map-tooltip {
+            position: absolute;
+            text-align: center;
+            padding: 8px 12px;
+            background: var(--cor-fundo-sidebar);
+            color: var(--cor-texto-sidebar-hover);
+            border-radius: 4px;
+            pointer-events: none; /* Garante que não interfira nos eventos do mapa */
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 0.9em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🛡️ Aegis</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="active" id="lbl-sidebar-dashboard">Dashboard Principal</a>
+                <a href="analise_cves.html" id="lbl-sidebar-analysis">Análise de CVEs</a>
+                <a href="vazamentos.html" id="lbl-sidebar-leaks">Vazamentos</a>
+                <a href="mapa_ameacas.html" class="active" id="lbl-sidebar-map">Mapa de Ameaças</a>
+                <a href="relatorios.html" id="lbl-sidebar-reports">Relatórios</a>
+                <a href="fontes.html" id="lbl-sidebar-settings">Fonte dos Dados</a>
+                <a href="colaboradores.html" id="lbl-sidebar-collaborators">Colaboradores</a>
+                <a href="https://github.com/vrsmarcos26/PI1-Project-Aegis">GitHub</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Project Aegis © 2025</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h2 id="lbl-map-title">Mapa Global de Ameaças (AbuseIPDB)</h2>
+                <div class="header-controls">
+                    <button id="theme-toggle" class="theme-toggle-button">
+                        Alternar Tema
+                    </button>
+                    <div class="lang-controls">
+                        <button class="lang-btn active" onclick="mudarIdiomaPagina('pt_br')">PT</button>
+                        <button class="lang-btn" onclick="mudarIdiomaPagina('en_us')">EN</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- NOVO: Aviso de escopo dos dados (mais recentes) -->
+            <div class="data-notice" style="margin-bottom: 15px; border-left: 4px solid var(--cor-aviso);">
+                <span class="notice-icon" style="color: var(--cor-aviso);">⚠️</span>
+                <div id="map-notice-scope">
+                    <!-- Conteúdo preenchido pelo JS com a chave notice_recent -->
+                </div>
+            </div>
+
+            <div class="map-container">
+                <p id="map-notice" style="margin-bottom: 15px; color: var(--cor-texto-secundario); font-size: 0.9em;"></p>
+                <div id="map-loader" class="loading-spinner" style="display: none;"></div>
+                <svg id="world-map-svg"></svg>
+            </div>
+            
+            <div id="map-tooltip" class="map-tooltip"></div>
+        </main>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        // --- VARIÁVEIS GLOBAIS DA PÁGINA ---
+        let idiomaAtual = localStorage.getItem('lang') || 'pt_br';
+        let dadosGeolocalizados = [];
+        let mapNotice = "";
+
+        // --- INICIALIZAÇÃO DA PÁGINA ---
+        document.addEventListener('DOMContentLoaded', () => {
+            iniciarTemaEIdiomaPagina();
+            carregarDadosEConstruirMapa();
+            
+            // Listener de tema
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                const newTheme = document.body.classList.contains('dark-theme') ? 'light' : 'dark';
+                document.body.classList.toggle('dark-theme');
+                localStorage.setItem('theme', newTheme);
+                atualizarBotaoTemaPagina(newTheme);
+                // Força a recarga do mapa para aplicar as novas cores de fundo
+                carregarDadosEConstruirMapa(false);
+            });
+        });
+
+        // Funções de suporte para tema/idioma
+        function iniciarTemaEIdiomaPagina() {
+             mudarIdiomaPagina(idiomaAtual);
+             const savedTheme = localStorage.getItem('theme') || 'light';
+             document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+             atualizarBotaoTemaPagina(savedTheme);
+        }
+
+        function atualizarBotaoTemaPagina(tema) {
+            const btn = document.getElementById('theme-toggle');
+            if(btn && typeof langConfig !== 'undefined') {
+                btn.innerText = langConfig[idiomaAtual].header.themeBtn[tema];
+            }
+        }
+
+        function setText(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = text;
+        }
+
+        function mudarIdiomaPagina(lang) {
+            idiomaAtual = lang;
+            localStorage.setItem('lang', lang);
+            
+            if (typeof langConfig === 'undefined') return;
+            const t = langConfig[lang];
+            const ts = t.sidebar;
+            const tm = t.mapPage; 
+
+            // Sidebar (Comum)
+            setText('lbl-sidebar-dashboard', ts.dashboard);
+            setText('lbl-sidebar-analysis', ts.analysis);
+            setText('lbl-sidebar-leaks', ts.leaks);
+            setText('lbl-sidebar-map', tm.sidebar); 
+            setText('lbl-sidebar-reports', ts.reports);
+            setText('lbl-sidebar-settings', ts.settings);
+            setText('lbl-sidebar-collaborators', ts.collaborators);
+            
+            // Títulos da Página
+            document.getElementById('title-mapa').innerText = tm.pageTitle;
+            setText('lbl-map-title', tm.title);
+            
+            // Aviso de Escopo
+            const mapScopeEl = document.getElementById('map-notice-scope');
+            if(mapScopeEl) mapScopeEl.innerHTML = tm.notice_recent;
+
+            mapNotice = tm.notice;
+            // O aviso principal só é preenchido pelo JS no final do carregamento
+            // document.getElementById('map-notice').innerText = mapNotice; 
+
+            // Atualiza botões visuais
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText.toLowerCase() === lang.split('_')[0]) btn.classList.add('active');
+            });
+            
+            const temaAtual = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+            atualizarBotaoTemaPagina(temaAtual);
+        }
+        
+        // --- LÓGICA DO MAPA D3.js ---
+        
+        const svg = d3.select("#world-map-svg");
+        const tooltip = d3.select("#map-tooltip");
+
+        function carregarDadosEConstruirMapa(showLoader = true) {
+            const svgElement = document.getElementById('world-map-svg');
+            const loaderElement = document.getElementById('map-loader');
+
+            if (showLoader) {
+                // Limpa SVG e mostra loader
+                svg.selectAll("*").remove();
+                svg.style('opacity', 0);
+                loaderElement.style.display = 'block';
+                document.getElementById('map-notice').innerText = langConfig[idiomaAtual].mapPage.notice;
+            } else {
+                // Se for só para trocar de tema, mantemos o loader escondido e redesenhamos
+                svg.selectAll("*").remove();
+            }
+
+            // O D3.js precisa do tamanho final do SVG para calcular a projeção
+            const width = svgElement.clientWidth;
+            const height = svgElement.clientHeight;
+
+            // Projeção do mapa (Equiretangular é melhor para mapas mundiais centrados)
+            const projection = d3.geoMercator()
+                .scale(width / 2 / Math.PI * 0.9) // Escala adaptável
+                .translate([width / 2, height / 1.6])
+                .center([0, 0]); // Centraliza no meridiano zero
+
+            const path = d3.geoPath().projection(projection);
+
+            // Carrega os dois datasets em paralelo
+            Promise.all([
+                // Dataset TopoJSON do mapa mundial
+                d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json"),
+                // Dados geolocalizados de IPs (mock)
+                d3.json("paises_kpis.json") 
+            ]).then(([world, ipData]) => {
+                
+                // --- 1. Processamento dos Dados ---
+                const countryCounts = {};
+                ipData.forEach(d => {
+                    const country = d.pais;
+                    if (country && country !== 'N/A') {
+                        countryCounts[country] = (countryCounts[country] || 0) + 1;
+                    }
+                });
+
+                dadosGeolocalizados = Object.entries(countryCounts).map(([country, count]) => {
+                    const coordinates = getCountryCoordinates(country);
+                    return {
+                        country: country,
+                        count: count,
+                        lat: coordinates.lat,
+                        lon: coordinates.lon
+                    };
+                }).filter(d => d.lat !== null); 
+
+                // --- 2. Desenho do Mapa ---
+                const g = svg.append("g").attr("class", "countries");
+
+                g.selectAll("path")
+                    .data(topojson.feature(world, world.objects.countries).features)
+                    .enter().append("path")
+                    .attr("class", "country")
+                    .attr("d", path)
+                    // Estilo de preenchimento do país deve ser definido no CSS para mudar com o tema
+                    .style("fill", () => {
+                         // Usa a cor de fundo principal definida no CSS para a classe country
+                         return getComputedStyle(document.body).getPropertyValue('--cor-fundo-principal'); 
+                    }); 
+
+                // --- 3. Adiciona Pontos de Ataque ---
+                addAttackPoints(projection, width, height);
+
+                // --- 4. Finalização ---
+                loaderElement.style.display = 'none';
+                svg.style('opacity', 1);
+                document.getElementById('map-notice').innerHTML = langConfig[idiomaAtual].mapPage.notice_loaded;
+                
+            }).catch(error => {
+                console.error("Erro ao carregar mapa ou dados:", error);
+                document.getElementById('map-notice').innerHTML = langConfig[idiomaAtual].mapPage.notice_error + error.message;
+                loaderElement.style.display = 'none';
+            });
+        }
+
+        function addAttackPoints(projection, mapWidth, mapHeight) {
+            const maxCount = d3.max(dadosGeolocalizados, d => d.count);
+            
+            // Escala para o raio dos círculos
+            const radiusScale = d3.scaleSqrt()
+                .domain([1, maxCount]) 
+                .range([2, 18]); 
+
+            svg.selectAll(".attack-point")
+                .data(dadosGeolocalizados)
+                .enter().append("circle")
+                .attr("class", "attack-point")
+                .attr("cx", d => {
+                    const coords = projection([d.lon, d.lat]);
+                    return coords ? coords[0] : -100;
+                })
+                .attr("cy", d => {
+                    const coords = projection([d.lon, d.lat]);
+                    return coords ? coords[1] : -100;
+                })
+                .attr("r", 0) // Começa com 0 para o efeito de transição
+                .transition()
+                .duration(1000)
+                .attr("r", d => radiusScale(d.count)) 
+                .selection() 
+                .on("mouseover", function(event, d) {
+                    const t = langConfig[idiomaAtual].mapPage.tooltip;
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", 1);
+                    tooltip.html(`<strong>${d.country}</strong><br>${t.attacks}: ${d.count.toLocaleString(idiomaAtual.replace('_', '-'))}`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 28) + "px");
+                })
+                .on("mouseout", function() {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                });
+        }
+
+        // --- Mock de Coordenadas (Usado para fins de demonstração) ---
+        function getCountryCoordinates(countryName) {
+            // Mapeamento mock de países (necessário porque o TopoJSON usa nomes geográficos específicos)
+            const map = {
+                "United States": { lat: 39.8283, lon: -98.5795 },
+                "Brazil": { lat: -14.235, lon: -51.9253 },
+                "Germany": { lat: 51.1657, lon: 10.4515 },
+                "China": { lat: 35.8617, lon: 104.1954 },
+                "Russia": { lat: 61.524, lon: 105.3188 },
+                "India": { lat: 20.5937, lon: 78.9629 },
+                "Japan": { lat: 36.2048, lon: 138.2529 },
+                "Canada": { lat: 56.1304, lon: -106.3468 },
+                "France": { lat: 46.2276, lon: 2.2137 },
+                "United Kingdom": { lat: 55.3781, lon: -3.436 },
+                "Mexico": { lat: 23.6345, lon: -102.5528 },
+                "Australia": { lat: -25.2744, lon: 133.7751 },
+                "South Korea": { lat: 35.9078, lon: 127.7692 },
+                "Italy": { lat: 41.8719, lon: 12.5674 },
+                "Spain": { lat: 40.4637, lon: -3.7492 },
+                "Netherlands": { lat: 52.1326, lon: 5.2913 },
+                "Afghanistan": { lat: 33.9391, lon: 67.7100 },
+                "Argentina": { lat: -38.4161, lon: -63.6167 },
+                "Bangladesh": { lat: 23.6850, lon: 90.3563 },
+                "Egypt": { lat: 26.8206, lon: 30.8025 },
+                "Nigeria": { lat: 9.0820, lon: 8.6753 },
+            };
+            const standardizedName = countryName.replace(/ /g, ' ').trim();
+            return map[standardizedName] || { lat: null, lon: null };
+        }
+    </script>
+</body>
+</html>
