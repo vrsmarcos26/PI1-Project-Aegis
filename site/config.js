@@ -25,7 +25,7 @@ const langConfig = {
             trend: "Tendência de Vulnerabilidades Críticas",
             severity: "Distribuição de Severidade",
             sectors: "Setores Mais Atacados (OTX)",
-            countries: "Top 5 Países (AbuseIPDB)",
+            countries: "Top 5 Países (AbuseIPDB - Hoje)",
             types: "Principais Tipos de Vulnerabilidade"
         },
         table: {
@@ -180,7 +180,7 @@ const langConfig = {
             trend: "Critical Vulnerabilities Trend",
             severity: "Severity Distribution",
             sectors: "Most Attacked Sectors (OTX)",
-            countries: "Top 5 Countries (AbuseIPDB)",
+            countries: "Top 5 Countries (AbuseIPDB - Today)",
             types: "Top Vulnerability Types"
         },
         table: {
