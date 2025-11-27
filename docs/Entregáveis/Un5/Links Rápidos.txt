@@ -1,0 +1,11 @@
+Google Colab para uso de Seaborn ou Matplotlib (mínimo de 3 gráficos distintos)
+
+https://colab.research.google.com/drive/1Y7AwifgsCx03gO8G7bVweArotpEdLTCr?usp=sharing
+
+Link para o site:
+
+https://vrsmarcos26.github.io/PI1-Project-Aegis/index.html
+
+Link para o GitHub:
+
+https://github.com/vrsmarcos26/PI1-Project-Aegis/tree/main
