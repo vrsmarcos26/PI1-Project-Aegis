@@ -9,7 +9,7 @@ import os
 # ==============================================================================
 # 0. CONFIGURAÇÃO DA API (NVD)
 # ==============================================================================
-API_KEY = "49e988e1-7235-47d9-8f56-a2e7e4cae151"
+API_KEY = ""
 API_URL = "https://services.nvd.nist.gov/rest/json/cves/2.0"
 headers = {'apiKey': API_KEY}
 
