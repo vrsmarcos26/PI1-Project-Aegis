@@ -8,7 +8,7 @@ import time
 # ==============================================================================
 # 0. CONFIGURAÇÃO DA API (AlienVault OTX)
 # ==============================================================================
-API_KEY = "6dc4519f2fe20cb267b376d6f626b0ee64243693f27d30109f3e6b1802e78c2d" 
+API_KEY = "" 
 
 if "SUA_CHAVE_OTX_AQUI" in API_KEY:
     print("ERRO: Adicione sua chave de API da OTX.")
