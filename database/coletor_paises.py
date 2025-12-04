@@ -8,7 +8,7 @@ from datetime import datetime
 # ==============================================================================
 # 0. CONFIGURAÇÃO DA API (AbuseIPDB)
 # ==============================================================================
-API_KEY = "4947aff3d5a68c6db3a3d38206e061b8df8033400f2c14c332acfc48c2ae8bc0b0924798870703a3" 
+API_KEY = "" 
 
 if "SUA_CHAVE" in API_KEY:
     print("ERRO: Adicione sua chave de API.")
