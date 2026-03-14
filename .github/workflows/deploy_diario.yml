@@ -59,3 +59,6 @@ jobs:
       - name: 7. Deploy para GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: 8. Evitar pausa por inatividade (Keepalive)
+        uses: gautamkrishnar/keepalive-workflow@v2
