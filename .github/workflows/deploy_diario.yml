@@ -12,6 +12,10 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   atualizar-e-publicar:
     runs-on: ubuntu-latest
@@ -20,7 +24,7 @@ jobs:
       - name: 1. Checkout do Repositório
         uses: actions/checkout@v4
         with:
-          persist-credentials: true # Garante o uso do token para o git push mais à frente
+          persist-credentials: true
 
       - name: 2. Configurar Python
         uses: actions/setup-python@v4
@@ -43,16 +47,20 @@ jobs:
           python src/scripts/coletor_cve.py
           python src/scripts/coletor_vazamentos.py
           echo "Coletas finalizadas!"
-          
-          ls -l site/
+
+          ls -la site/
 
       - name: 5. Salvar dados no repositório (Evita pausa de 60 dias)
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add site/
-          git commit -m "chore: atualização diária dos dados coletados" || echo "Nenhuma mudança nos dados hoje"
-          git push
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: atualização diária dos dados coletados"
+            git push
+          else
+            echo "Nenhuma mudança nos dados hoje"
+          fi
 
       - name: 6. Configurar GitHub Pages
         uses: actions/configure-pages@v4
