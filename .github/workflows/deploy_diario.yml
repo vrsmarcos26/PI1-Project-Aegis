@@ -60,6 +60,7 @@ jobs:
       - name: 7. Upload do Site (Artefato)
         uses: actions/upload-pages-artifact@v4
         with:
+          name: github-pages
           path: 'site/'
 
       - name: 8. Deploy para GitHub Pages
